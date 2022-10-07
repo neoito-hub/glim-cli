@@ -1,30 +1,29 @@
 ---
 sidebar_position: 1
+slug: "/"
 ---
 
-# Tutorial Intro
+# Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to **GLIM CLI**.
 
-## Getting Started
+## Title
 
-Get started by **creating a new site**.
+Get started by **dummy data**.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+### SubTitle
 
-### What you'll need
+- point
+  - sub-point
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
+## Title
 
 Generate a new Docusaurus site using the **classic template**.
 
 The classic template will automatically be added to your project after you run the command:
 
 ```bash
-npm init docusaurus@latest my-website classic
+code
 ```
 
 You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
