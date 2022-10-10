@@ -9,10 +9,20 @@ export async function createProject(appname) {
   if (validationStatus) {
     fs.mkdir(appname, (err) => {
       if (err === null) {
-        fsextra.copy(
-          appRootPath.path + "/boilerplate",
-          appRootPath.path + "/" + appname
-        );
+        fsextra
+          .copy(
+            appRootPath.path + "/boilerplate",
+            appRootPath.path + "/" + appname
+          )
+          .then(() => {
+            shell.cd(appname);
+            shell.cd("ios");
+            shell.exec("pwd");
+            shell.exec("pod install");
+          })
+          .catch(() => {
+            console.log("something went wrong");
+          });
       } else {
         console.log(chalk.bgRed(err.message));
       }
