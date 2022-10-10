@@ -1,0 +1,9 @@
+{
+  "label": "Title",
+  "position": 3,
+  "collapsible": true,
+  "link": {
+    "type": "generated-index",
+    "description": "Test Titles."
+  }
+}
