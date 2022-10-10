@@ -1,29 +1,35 @@
 {
-  "name": "rn-cli",
+  "name": "glim-cli",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "node src/index.js"
+  "main": "dist/index.js",
+  "directories": {
+    "doc": "docs"
   },
   "bin": {
-    "rn-cli": "./src/index.js"
+    "glim" : "dist/index.js"
   },
-  "type": "module",
+  "scripts": {
+    "start": "node dist/index.js"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devpenzil/rn-cli.git"
+    "url": "git+https://github.com/neoito-hub/glim-cli.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/devpenzil/rn-cli/issues"
+    "url": "https://github.com/neoito-hub/glim-cli/issues"
   },
-  "homepage": "https://github.com/devpenzil/rn-cli#readme",
-  "dependencies": {
+  "homepage": "https://github.com/neoito-hub/glim-cli#readme",
+  "devDependencies": {
+    "@types/node": "^18.8.3",
+    "typescript": "^4.8.4",
+    "app-root-path": "^3.1.0",
     "chalk": "^5.0.1",
     "ejs": "^3.1.8",
+    "fs-extra": "^10.1.0",
     "inquirer": "^9.1.2",
     "print-message": "^3.0.1",
     "shelljs": "^0.8.5",
