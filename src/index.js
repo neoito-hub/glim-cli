@@ -2,7 +2,7 @@
 import { createProject } from "./commands/create-project.js";
 import yargs from "yargs";
 import chalk from "chalk";
-import { createComponent } from "./commands/create-component.js";
+// import { createComponent } from "./commands/create-component.js";
 import { createScreen } from "./commands/create-screen.js";
 import printmessage from "print-message";
 const args = yargs(process.argv.slice(2))
@@ -18,7 +18,7 @@ const args = yargs(process.argv.slice(2))
 const Start = async () => {
   if (args._.includes("generate")) {
     if (args.component) {
-      createComponent(args.component);
+      // createComponent(args.component);
     } else if (args.screen) {
       createScreen(args.screen);
     } else {
