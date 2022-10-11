@@ -7,6 +7,7 @@ module.exports = {
     'plugin:@typescript-eslint/all', // Unstable
     'plugin:jest/all', // Unstable
     'plugin:react-native/all',
+    '@typescript-eslint/parser',
     // Recommended
     'plugin:import/recommended', // plugin:import/errors + plugin:import/warnings
     'plugin:import/typescript', // This line apaz does the trick - but which pony?
