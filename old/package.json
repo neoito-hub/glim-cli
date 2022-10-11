@@ -6,9 +6,6 @@
   "scripts": {
     "start": "node src/index.js"
   },
-  "bin": {
-    "glim": "./src/index.js"
-  },
   "type": "module",
   "repository": {
     "type": "git",
