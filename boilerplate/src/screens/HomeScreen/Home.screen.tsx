@@ -6,7 +6,7 @@ type Props = {}
 
 const HomePage = (props: Props) => {
   return (
-    <View style={[t.flex1, t.justifyCenter, t.alignCenter]}>
+    <View style={[t.flex1, t.justifyCenter, t.alignCenter, t.selfCenter]}>
       <Text style={[t.textBlack]}>Home.Page</Text>
     </View>
   )

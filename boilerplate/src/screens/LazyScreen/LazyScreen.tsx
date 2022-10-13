@@ -2,7 +2,7 @@ import React from 'react'
 import { PageFallBackUi, withPageSuspense } from '../../utils/suspense/lazyPage'
 
 const LazyHomePage = withPageSuspense(
-  React.lazy(() => import('../Home/Home.screen')),
+  React.lazy(() => import('../HomeScreen/Home.screen')),
   PageFallBackUi
 )
 

@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { LazyHomePage } from '../screens/LazyPages/LazyPages'
-import { setTopLevelNavigator } from './navigations'
+import { LazyHomePage } from '../screens/LazyScreen/LazyScreen'
+import { setTopLevelNavigator } from './navigationsUtils'
 
 const RootStack = createStackNavigator()
 
