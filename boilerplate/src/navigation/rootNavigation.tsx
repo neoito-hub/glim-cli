@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { LazyHomePage } from '../screens/LazyScreen/LazyScreen'
 import { setTopLevelNavigator } from './navigationsUtils'
 
+
 const RootStack = createStackNavigator()
 
 const RootNavigation = () => {
