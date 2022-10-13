@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "bin": {
-    "glim" : "dist/index.js"
+    "glim": "dist/index.js"
   },
   "scripts": {
     "start": "node dist/index.js"
@@ -24,15 +24,21 @@
   },
   "homepage": "https://github.com/neoito-hub/glim-cli#readme",
   "devDependencies": {
-    "@types/node": "^18.8.3",
-    "typescript": "^4.8.4",
+    "@types/node": "^18.8.3"
+  },
+  "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/shelljs": "^0.8.11",
+    "@types/yargs": "^17.0.13",
     "app-root-path": "^3.1.0",
     "chalk": "^5.0.1",
     "ejs": "^3.1.8",
     "fs-extra": "^10.1.0",
+    "gluegun": "^5.1.2",
     "inquirer": "^9.1.2",
     "print-message": "^3.0.1",
     "shelljs": "^0.8.5",
+    "typescript": "^4.8.4",
     "yargs": "^17.6.0"
   }
 }

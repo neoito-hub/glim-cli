@@ -1,9 +1,8 @@
 /* eslint-disable react-native/no-raw-text, no-console */
 // https://github.com/Intellicode/eslint-plugin-react-native/issues/271
 
-import { SafeAreaView } from 'react-native'
-import { t } from 'react-native-tailwindcss'
 // TODO: Fix Storybook v6.0.1-alpha.7 crash and upgrade to v6.0.1-beta.6
+import { useNavigationState } from '@react-navigation/native'
 import _StorybookUIRoot from '../.storybook/Storybook'
 import { RootNavigation } from './navigation/rootNavigation'
 
