@@ -6,4 +6,9 @@ const LazyHomePage = withPageSuspense(
   PageFallBackUi
 )
 
-export { LazyHomePage }
+const LazyListScreen = withPageSuspense(
+  React.lazy(() => import('../ListScreen/List.screen')),
+  PageFallBackUi
+)
+
+export { LazyHomePage, LazyListScreen }
