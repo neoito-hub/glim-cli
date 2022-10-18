@@ -5,7 +5,10 @@ import appRootPath from "app-root-path";
 import { checkversions } from "../utils/react-native";
 import shell from "shelljs";
 
-// * Function to create new react native project
+/**
+ * Function to create new react native project
+ * @param appname - name of the project folder
+ */
 const createProject = async (appname: string) => {
   let packagemanager: any = "";
   await checkversions().then((response) => {

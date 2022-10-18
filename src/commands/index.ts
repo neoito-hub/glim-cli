@@ -1,4 +1,6 @@
 import { createComponent } from "./create-component";
 import { createProject } from "./create-project";
+import { CreateScreen } from "./create-screen";
 
-export { createComponent, createProject };
+// common export for all commands
+export { createComponent, createProject, CreateScreen };
