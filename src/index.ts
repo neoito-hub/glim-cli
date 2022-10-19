@@ -1,6 +1,5 @@
 import yargs from "yargs";
-import { createComponent, createProject } from "./commands";
-import { createScreen } from "./commands/create-screen";
+import { createComponent, createProject, createScreen } from "./commands";
 import { toPascalCase } from "./utils/namevalidator";
 
 // * get arguments from command line
@@ -8,7 +7,6 @@ const args: any = yargs(process.argv.slice(2)).argv;
 
 // * Initial Function
 const start = async () => {
-  console.log(args);
   // * check is create-app command is available
   if (args["_"].includes("create-app")) {
     createProject(args["_"][1]);
@@ -16,9 +14,9 @@ const start = async () => {
   } else if (args["_"].includes("generate")) {
     if (args?.component) {
       createComponent(toPascalCase(args?.component));
-    }
-    if (args?.screen) {
+    } else if (args?.screen) {
       createScreen(toPascalCase(args?.screen));
+    } else {
     }
   } else {
     console.log("available commands are..");
