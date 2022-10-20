@@ -1,0 +1,20 @@
+import { View, Text } from "react-native";
+import React from "react";
+import { style } from "./<%= props %>.style";
+
+interface <%= props %>Props {
+  sampleprop?: string;
+}
+
+/**
+ * Describe Your Component Here..
+ */
+const <%= props %> = ({}: <%= props %>Props) => {
+  return (
+    <View style={style.component}>
+      <Text><%= props %></Text>
+    </View>
+  );
+};
+
+export default <%= props %>;

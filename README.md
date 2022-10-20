@@ -6,23 +6,23 @@ React Native Latest Architecture CLI along with a fully tested boilerplate, comp
 ## Create new React Native Project
 
 ```bash
-glim create-app [app-name]
+npx glim create-app [app-name]
 ```
 
 ## Create new Component
 
 ```bash
-glim generate --component [component-name]
+npx glim generate --component [component-name]
 ```
 
 ## Create new Screen
 
 ```bash
-glim generate --screen [screen-name]
+npx glim generate --screen [screen-name]
 ```
 
 ## Create new Redux components
 
 ```bash
-glim generate --store [component-name]
+npx glim generate --store [component-name]
 ```

@@ -9,4 +9,7 @@
     "outDir": "dist"                   
   },
   "exclude": ["./boilerplate","./docs","./node_modules"],
+  "include": [
+    "src/**/*"
+],
 }
