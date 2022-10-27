@@ -6,7 +6,7 @@ import { checkversions } from "../utils/react-native";
 import shell from "shelljs";
 import gradient from "gradient-string";
 import figlet from "figlet";
-import { execSync } from "node:child_process";
+import { execSync, exec } from "node:child_process";
 import { createSpinner } from "nanospinner";
 
 /**
@@ -14,6 +14,7 @@ import { createSpinner } from "nanospinner";
  * @param appname - name of the project folder
  */
 const createProject = async (appname: string) => {
+  const depsinstall = createSpinner("Installing Dependencies....");
   console.clear();
   figlet("Glim", (err, data) => {
     console.log(gradient.instagram.multiline(data));
@@ -24,21 +25,34 @@ const createProject = async (appname: string) => {
   });
   await validator(appname);
   await createfolder(appname);
-  await fsextra
-    .copy(appRootPath.path + "/boilerplate", appRootPath.path + "/" + appname)
-    .then(() => {
-      try {
-        shell.cd(appname);
-        packagemanager === "yarn" && execSync("yarn");
-        packagemanager === "npm" && execSync("npm install --legacy-peer-deps");
-        shell.cd("ios");
-        execSync("pod install");
-      } catch (error) {
-        console.log({ error });
-      }
-    })
-    .catch((err) => {
+  exec(`cp -r ${appRootPath}/dist/boilerplate/* ${appname}/`, (err) => {
+    depsinstall.start();
+    if (!err) {
+      packagemanager === "yarn" && execSync(`cd ${appname} && yarn`);
+      packagemanager === "npm" &&
+        execSync(`cd ${appname} && npm install --legacy-peer-deps`);
+      execSync(`cd ${appname}/ios && pod install`);
+      depsinstall.stop();
+    } else {
+      depsinstall.error();
       console.log(err);
-    });
+    }
+  });
+  // await fsextra
+  //   .copy(appRootPath.path + "/dist/boilerplate", "/" + appname)
+  //   .then(() => {
+  //     try {
+  //       shell.cd(appname);
+  //       packagemanager === "yarn" && execSync("yarn");
+  //       packagemanager === "npm" && execSync("npm install --legacy-peer-deps");
+  //       shell.cd("ios");
+  //       execSync("pod install");
+  //     } catch (error) {
+  //       console.log({ error });
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 };
 export { createProject };

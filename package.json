@@ -10,7 +10,7 @@
     "glim": "dist/index.js"
   },
   "scripts": {
-    "start": "node dist/index.js"
+    "start": "npx ts-node dist/index.js"
   },
   "repository": {
     "type": "git",
