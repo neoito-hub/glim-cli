@@ -7,10 +7,13 @@ const regex = new RegExp(/^[a-zA-Z]+$/);
  * @returns
  */
 export function validator(appname: string) {
-  const waiting = createSpinner("validationg Name").start();
+  const waiting = createSpinner("validating Name").start();
   return new Promise((resolve, reject) => {
     if (!regex.test(appname)) {
       waiting.error();
+      console.log(
+        "Invalid Name - Name must be include charecters. No digits and special charecters allowed"
+      );
       process.exit(1);
     } else {
       waiting.success();
