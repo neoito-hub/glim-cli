@@ -1,5 +1,10 @@
 import { system } from "gluegun";
 import { execSync } from "node:child_process";
+/**
+ * check system versions
+ * node version, npm version, ruby installed
+ * @returns
+ */
 const checkversions = async () => {
   return new Promise((resolve, reject) => {
     const nodeversion: number = Number(process.version.at(2)) || 0;
