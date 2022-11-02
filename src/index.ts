@@ -1,13 +1,23 @@
+#!/usr/bin/env node
+
 import yargs from "yargs";
-import { createComponent, createProject } from "./commands";
+import { createProject } from "./commands";
+import { toPascalCase } from "./utils/namevalidator";
 
-// * get arguments from command line
-const args: any = yargs(process.argv.slice(2)).parse();
+const args: any = yargs(process.argv.slice(2)).argv;
 
-// * Initial Function
 const start = async () => {
   if (args["_"].includes("create-app")) {
-    createProject(args["_"][1]);
+    createProject(toPascalCase(args["_"][1]));
+  } else if (args["_"].includes("generate")) {
+    if (args?.component) {
+      // createComponent(toPascalCase(args?.component));
+    } else if (args?.screen) {
+      // createScreen(toPascalCase(args?.screen));
+    } else {
+    }
+  } else {
+    console.log("available commands are..");
   }
 };
 start();
