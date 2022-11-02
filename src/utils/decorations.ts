@@ -41,4 +41,10 @@ const projectQuestions = async () => {
     return packagename;
   });
 };
-export { projectCreated, projectQuestions };
+const helpConsole = async () => {
+  return new Promise(async (resolve, reject) => {
+    console.log("Invalid command");
+    resolve(true);
+  });
+};
+export { projectCreated, projectQuestions, helpConsole };
