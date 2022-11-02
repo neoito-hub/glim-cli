@@ -1,13 +1,10 @@
 import ejs from "ejs";
 import * as fs from "fs";
+import { componentTemplate, styleTemplate } from "../template/component";
 
-const component = ejs.render('<%= people.join(", "); %>', {
-  people: ["geddy", "neil", "alex"],
-});
-const style = ejs.render('<%= people.join(", "); %>', {
-  people: ["geddy", "neil", "alex"],
-});
-const createComponent = (compname: string) => {
+const createComponent = async (compname: string) => {
+  const component = await componentTemplate(compname);
+  const style = await styleTemplate(compname);
   fs.mkdir(`./src/components/${compname}`, (err) => {
     if (!err) {
       fs.writeFileSync(
