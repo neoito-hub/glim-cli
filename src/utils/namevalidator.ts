@@ -7,7 +7,7 @@ const regex = new RegExp(/^[a-zA-Z]+$/);
  * @returns
  */
 export function validator(appname: string) {
-  const waiting = createSpinner("validating Name").start();
+  const waiting = createSpinner("validating Name [1/6]").start();
   return new Promise((resolve, reject) => {
     if (!regex.test(appname)) {
       waiting.error();
