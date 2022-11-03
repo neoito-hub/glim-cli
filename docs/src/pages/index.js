@@ -8,6 +8,7 @@ import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import styles from "./index.module.css";
 import SpotLight from "../components/Spotlight";
 import Features from "../components/features";
+import Starter from "../components/starter/Starter";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -31,8 +32,11 @@ export default function Home() {
   return (
     <div>
       {/* <HomepageHeader /> */}
+      {/* <Layout> */}
       <SpotLight />
       <Features />
+      <Starter />
+      {/* </Layout> */}
       {/* <main>
         <HomepageFeatures />
       </main> */}

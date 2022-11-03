@@ -15,5 +15,7 @@
 .feat-block{
     display: flex;
     flex-wrap: wrap;
-
+}
+.feat-headings{
+font-size: 1.5rem;
 }

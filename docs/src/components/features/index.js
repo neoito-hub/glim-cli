@@ -14,7 +14,16 @@ function Features() {
       </div>
       <div className="feat-block">
         {[1, 2, 3, 4].map((obj) => {
-          return <div className="feat-area">hello</div>;
+          return (
+            <div className="feat-area">
+              <p className="feat-headings">Heading</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Doloribus voluptatem porro tempore itaque praesentium
+                perspiciatis
+              </p>
+            </div>
+          );
         })}
       </div>
     </div>
