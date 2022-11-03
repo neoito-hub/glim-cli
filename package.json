@@ -10,7 +10,8 @@
     "glim": "dist/index.js"
   },
   "scripts": {
-    "start": "npx ts-node dist/index.js"
+    "start": "npx ts-node dist/index.js",
+    "copyboilerplate":"cp -r boilerplate/ dist/boilerplate/"
   },
   "repository": {
     "type": "git",

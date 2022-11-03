@@ -3,8 +3,8 @@ import * as fs from "fs";
 import { componentTemplate, styleTemplate } from "../template/component";
 
 const createComponent = async (compname: string) => {
-  const component = await componentTemplate(compname);
-  const style = await styleTemplate(compname);
+  const component = componentTemplate(compname);
+  const style = styleTemplate(compname);
   fs.mkdir(`./src/components/${compname}`, (err) => {
     if (!err) {
       fs.writeFileSync(

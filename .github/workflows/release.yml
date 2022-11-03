@@ -21,6 +21,8 @@ jobs:
         run: npm install
       - name: build
         run: npx tsc
+      - name: Copy Boilerplate 🔧
+        run: npm run copyboilerplate
       - name: Install dependencies and build 🔧
         run: npm run start
       - name: Publish package on NPM 📦
