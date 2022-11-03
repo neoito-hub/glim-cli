@@ -1,0 +1,45 @@
+.starter{
+    background-color:#CE643A ;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.starter-block{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.starter-head{
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+}
+.starter-card{
+    border: 1px solid white;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 10px;
+    width: 50%;
+    color: #fff;
+    font-family: monospace;
+    font-size: 1rem;
+    position: relative;
+}
+.code-copy{
+    position: absolute;
+    right: 10px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    transition: 0.5s;
+    border-radius: 5px;
+    top: 30%;
+
+}
+.clipboard{
+    width: 24px;
+    height: 24px;
+}
