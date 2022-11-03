@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'GLIM CLI',
   tagline: '',
-  url: 'https://neoito-hub.github.io/glim-cli/',
+  url: 'https://neoito-hub.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
