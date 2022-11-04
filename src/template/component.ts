@@ -1,6 +1,5 @@
-const componentTemplate = async (compname: any) => {
-  return new Promise(async (resolve, reject) => {
-    const temp = `
+const componentTemplate = (compname: any) => {
+  const temp = `
     import { View, Text } from "react-native";
     import React from "react";
     import { style } from "${compname}.style";
@@ -20,13 +19,11 @@ const componentTemplate = async (compname: any) => {
     export default ${compname};
 
     `;
-    resolve(temp);
-  });
+  return temp;
 };
 
-const styleTemplate = async (compname: any) => {
-  return new Promise(async (resolve, reject) => {
-    const temp = `
+const styleTemplate = (compname: any) => {
+  const temp = `
     import { StyleSheet } from "react-native";
 
     export const style = StyleSheet.create({
@@ -35,8 +32,7 @@ const styleTemplate = async (compname: any) => {
       },
     });
       `;
-    resolve(temp);
-  });
+  return temp;
 };
 
 export { componentTemplate, styleTemplate };
