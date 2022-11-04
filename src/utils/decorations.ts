@@ -1,6 +1,8 @@
 import figlet from "figlet";
 import gradient from "gradient-string";
+import { createSpinner } from "nanospinner";
 import * as readline from "readline-sync";
+import { sleep } from "./helper";
 
 const packegeRegex = new RegExp(/^com\./);
 async function projectCreated() {
@@ -34,7 +36,7 @@ const projectQuestions = async () => {
       if (packegeRegex.test(packagename)) {
         break;
       } else {
-        console.log("invalida package name. enter again");
+        console.log("invalide package name. enter again");
       }
     }
     resolve(true);

@@ -1,5 +1,4 @@
 import { projectCreated, projectQuestions } from "../utils/decorations";
-import { execSync, exec } from "node:child_process";
 import {
   installNodeModules,
   installPods,
