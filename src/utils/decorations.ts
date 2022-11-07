@@ -45,7 +45,10 @@ const projectQuestions = async () => {
 };
 const helpConsole = async () => {
   return new Promise(async (resolve, reject) => {
-    console.log("Invalid command");
+    console.log("Invalid or Incomplete command");
+    console.log(
+      `Please refer doc for more details https://neoito-hub.github.io/glim-cli/ `
+    );
     resolve(true);
   });
 };

@@ -35,4 +35,11 @@ const checkversions = async () => {
     }
   });
 };
-export { checkversions };
+const getPackageManager = () => {
+  return (
+    (Boolean(system.which("yarn")) && "yarn") ||
+    (Boolean(system.which("npm")) && "npm") ||
+    "npm"
+  );
+};
+export { checkversions, getPackageManager };
