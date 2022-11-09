@@ -110,7 +110,7 @@ const setProject = async (appname: any) => {
   return new Promise((resolve, reject) => {
     fs.mkdir(appname, (err) => {
       if (!err) {
-        execSync(`${filecopy} ${root}boilerplate/. ${appname}/`);
+        execSync(`${filecopy} ${root}boilerplate/. ${appname}/.`);
         spinner.update({ text: "Project Created ✅" }).success();
         resolve(true);
       } else {

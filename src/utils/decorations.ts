@@ -5,28 +5,29 @@ import * as readline from "readline-sync";
 import { sleep } from "./helper";
 
 const packegeRegex = new RegExp(/^com\./);
-async function projectCreated() {
-  figlet.text(
-    "Glim ",
-    {
-      font: "3D-ASCII",
-      horizontalLayout: "default",
-      verticalLayout: "default",
-      width: 100,
-      whitespaceBreak: true,
-    },
-    function (err, data) {
-      if (err) {
-        console.log("Something went wrong...");
-        console.dir(err);
-        return;
+async function startingProject() {
+  return new Promise(async (resolve, reject) => {
+    figlet.text(
+      "Glim ",
+      {
+        font: "ANSI Regular",
+        horizontalLayout: "default",
+        verticalLayout: "default",
+        width: 100,
+        whitespaceBreak: true,
+      },
+      function (err, data) {
+        if (err) {
+          console.log("Something went wrong...");
+          console.dir(err);
+          return;
+        }
+        console.log(" ");
+        console.log(gradient.instagram.multiline(data));
+        resolve(true);
       }
-      console.log(gradient.instagram.multiline(data));
-      console.log(
-        "React Native Latest Architecture CLI along with a fully tested boilerplate, component/screen generators, and more! 🎉"
-      );
-    }
-  );
+    );
+  });
 }
 const projectQuestions = async () => {
   let packagename = "";
@@ -52,4 +53,4 @@ const helpConsole = async () => {
     resolve(true);
   });
 };
-export { projectCreated, projectQuestions, helpConsole };
+export { startingProject, projectQuestions, helpConsole };
