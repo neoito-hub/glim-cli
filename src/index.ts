@@ -16,6 +16,7 @@ const start = async () => {
     } else if (args?.screen) {
       createScreen(toPascalCase(args?.screen));
     } else {
+      helpConsole();
     }
   } else {
     helpConsole();

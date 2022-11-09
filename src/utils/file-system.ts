@@ -3,6 +3,8 @@ import { createSpinner } from "nanospinner";
 import path from "node:path";
 import * as fs from "fs";
 import { sleep } from "./helper";
+import { getPackageManager } from "./react-native";
+import { filecopy } from "../constants/system";
 
 const cloneProject = async (appname: any) => {
   const spinner = createSpinner("Creating Project ").start();
@@ -26,18 +28,25 @@ const installNodeModules = async (appname: any) => {
   const nodeSpinner = createSpinner(
     `Hold on, were grabbing the dependencies you need for ${appname}`
   ).start();
+  const packagemanager = getPackageManager();
   return new Promise((resolve, reject) => {
-    exec(`cd ${appname} && npm install --legacy-peer-deps`, (err) => {
-      if (err) {
-        nodeSpinner.error();
-        console.log(err);
-        process.exit(1);
-      } else {
-        nodeSpinner.update({ text: "Dependencies Installed ✅" });
-        nodeSpinner.success();
-        resolve(true);
+    exec(
+      `cd ${appname} &&  ${packagemanager} install ${
+        packagemanager === "npm" ? "--legacy-peer-deps" : ""
+      }`,
+      (err) => {
+        if (err) {
+          nodeSpinner
+            .update({ text: "Unable to install dependencies" })
+            .error();
+          console.log(err);
+          process.exit(1);
+        } else {
+          nodeSpinner.update({ text: "Dependencies Installed ✅" }).success();
+          resolve(true);
+        }
       }
-    });
+    );
   });
 };
 
@@ -101,7 +110,7 @@ const setProject = async (appname: any) => {
   return new Promise((resolve, reject) => {
     fs.mkdir(appname, (err) => {
       if (!err) {
-        execSync(`cp -r ${root}boilerplate/ ${appname}/`);
+        execSync(`${filecopy} ${root}boilerplate/. ${appname}/.`);
         spinner.update({ text: "Project Created ✅" }).success();
         resolve(true);
       } else {
