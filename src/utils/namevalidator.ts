@@ -1,4 +1,5 @@
 import { createSpinner } from "nanospinner";
+import { sleep } from "./helper";
 const regex = new RegExp(/^[a-zA-Z]+$/);
 
 /**
@@ -6,16 +7,18 @@ const regex = new RegExp(/^[a-zA-Z]+$/);
  * @param appname
  * @returns
  */
-export function validator(appname: string) {
+
+export async function validator(appname: string) {
   const waiting = createSpinner("validating Name...").start();
+  await sleep();
   return new Promise((resolve, reject) => {
     if (!regex.test(appname)) {
       waiting.error({
-        text: "Invalid Name - Name must be include charecters. No digits and special charecters allowed",
+        text: "Invalid Name - Please check the naming documentation 😥",
       });
       process.exit(1);
     } else {
-      waiting.update({ text: "Its a Valid name ✅" }).success();
+      waiting.update({ text: `App name verified - ${appname} 👍🏻` }).success();
       resolve(true);
     }
   });

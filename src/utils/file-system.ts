@@ -2,6 +2,7 @@ import { execSync, exec } from "node:child_process";
 import { createSpinner } from "nanospinner";
 import path from "node:path";
 import * as fs from "fs";
+import { sleep } from "./helper";
 
 const cloneProject = async (appname: any) => {
   const spinner = createSpinner("Creating Project ").start();
@@ -23,7 +24,7 @@ const cloneProject = async (appname: any) => {
 
 const installNodeModules = async (appname: any) => {
   const nodeSpinner = createSpinner(
-    "Installing Dependencies... (It may take some time)"
+    `Hold on, were grabbing the dependencies you need for ${appname}`
   ).start();
   return new Promise((resolve, reject) => {
     exec(`cd ${appname} && npm install --legacy-peer-deps`, (err) => {
@@ -92,7 +93,10 @@ const renameProject = async (appname: any, packagename: any) => {
 };
 
 const setProject = async (appname: any) => {
-  const spinner = createSpinner("Creating Project...").start();
+  const spinner = createSpinner(
+    `Cooking new project seed for ${appname}`
+  ).start();
+  await sleep();
   const root = path.join(path.dirname(fs.realpathSync(__filename)), "../");
   return new Promise((resolve, reject) => {
     fs.mkdir(appname, (err) => {
@@ -104,7 +108,7 @@ const setProject = async (appname: any) => {
         spinner.error({
           text:
             err.code === "EEXIST"
-              ? `Folder ${appname} already exist ❌`
+              ? `Hmm seems like ${appname} already exists 🤕 `
               : "Something went wrong",
         });
       }
