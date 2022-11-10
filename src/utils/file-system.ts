@@ -1,6 +1,6 @@
 import { execSync, exec } from "node:child_process";
 import { createSpinner } from "nanospinner";
-import path from "node:path";
+import path, { resolve } from "node:path";
 import * as fs from "fs";
 import { sleep } from "./helper";
 import { getPackageManager } from "./react-native";
@@ -124,6 +124,23 @@ const setProject = async (appname: any) => {
     });
   });
 };
+
+const checkIfInsideProject = async () => {
+  const spinner = createSpinner(`Finding the landing location`).start();
+  await sleep();
+  return new Promise((resolve, reject) => {
+    fs.readdir(`${process.cwd()}`, (err, files) => {
+      if (files.includes("android" && "ios" && "package.json")) {
+        spinner.update({ text: "Target locked" }).success();
+        resolve(true);
+      } else {
+        spinner
+          .update({ text: "Its seems like you are outside the project" })
+          .error();
+      }
+    });
+  });
+};
 export {
   cloneProject,
   installNodeModules,
@@ -131,4 +148,5 @@ export {
   miscSetup,
   renameProject,
   setProject,
+  checkIfInsideProject,
 };
