@@ -29,11 +29,16 @@ export async function validator(appname: string) {
  * @returns
  */
 export function toPascalCase(name: any) {
-  const UpdatedName = name.replace(
-    /(\w)(\w*)/g,
-    function (g0: any, g1: any, g2: any) {
-      return g1.toUpperCase() + g2.toLowerCase();
-    }
-  );
-  return UpdatedName;
+  if (!regex.test(name)) {
+    console.log(`${name} is not a valid name`);
+    process.exit(1);
+  } else {
+    const UpdatedName = name.replace(
+      /(\w)(\w*)/g,
+      function (g0: any, g1: any, g2: any) {
+        return g1.toUpperCase() + g2.toLowerCase();
+      }
+    );
+    return UpdatedName;
+  }
 }
