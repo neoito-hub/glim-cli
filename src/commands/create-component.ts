@@ -31,6 +31,12 @@ const createComponent = async (compname: string) => {
             );
         }
       );
+      const newline = `export { ${compname} } from './image/${compname}'`;
+      fs.appendFile("./src/components/index.ts", newline + "\r\n", (err) => {
+        if (err) {
+          console.log("Unable to update index.ts file");
+        }
+      });
     } else {
       err?.code === "EEXIST" &&
         console.log(`Error: Component ${compname} already exist`);
