@@ -40,8 +40,14 @@ const projectQuestions = async () => {
         console.log("invalide package name. enter again");
       }
     }
-    resolve(true);
-    return packagename;
+    const storeOptions: Array<string> = ["redux", "zustand"];
+    const storeName = readline.keyInSelect(
+      storeOptions,
+      "Choose the State management."
+    );
+    const selectedStore = storeOptions[storeName];
+    !selectedStore && process.exit();
+    resolve({ packagename, selectedStore });
   });
 };
 const helpConsole = async () => {

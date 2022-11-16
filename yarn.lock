@@ -55,10 +55,10 @@
   dependencies:
     "@types/tinycolor2" "*"
 
-"@types/inquirer@^9.0.2":
-  "integrity" "sha512-MQc3adiIh/rDxLkjnvL03rSvuHg+/dKif4dn/MRsnE+oU1bAdyuDbW0w+ewR1M/M/u/Z0YAbw7NZYCpgQ5SW8A=="
-  "resolved" "https://registry.npmjs.org/@types/inquirer/-/inquirer-9.0.2.tgz"
-  "version" "9.0.2"
+"@types/inquirer@^9.0.3":
+  "integrity" "sha512-CzNkWqQftcmk2jaCWdBTf9Sm7xSw4rkI1zpU/Udw3HX5//adEZUIm9STtoRP1qgWj0CWQtJ9UTvqmO2NNjhMJw=="
+  "resolved" "https://registry.npmjs.org/@types/inquirer/-/inquirer-9.0.3.tgz"
+  "version" "9.0.3"
   dependencies:
     "@types/through" "*"
     "rxjs" "^7.2.0"

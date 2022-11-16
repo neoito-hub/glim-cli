@@ -11,7 +11,7 @@ const cloneProject = async (appname: any) => {
   const spinner = createSpinner("Creating Project ").start();
   return new Promise((resolve, reject) => {
     exec(
-      `git clone https://github.com/devpenzil/Template-Project ${appname}`,
+      `git clone https://github.com/devpenzil/onecredit-rn.git ${appname}`,
       (err) => {
         if (err) {
           spinner.error();
