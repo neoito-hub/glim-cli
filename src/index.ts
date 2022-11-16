@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 
 import yargs from "yargs";
-import { createComponent, createProject, createScreen } from "./commands";
+import {
+  createComponent,
+  createProject,
+  createScreen,
+  createStore,
+} from "./commands";
 import { helpConsole } from "./utils/decorations";
 import { toPascalCase } from "./utils/namevalidator";
 
@@ -15,6 +20,8 @@ const start = async () => {
       createComponent(toPascalCase(args?.component));
     } else if (args?.screen) {
       createScreen(toPascalCase(args?.screen));
+    } else if (args?.store) {
+      createStore(args?.store);
     } else {
       helpConsole();
     }

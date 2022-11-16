@@ -5,6 +5,7 @@ import * as fs from "fs";
 import { sleep } from "./helper";
 import { getPackageManager } from "./react-native";
 import { filecopy } from "../constants/system";
+import * as readline from "readline-sync";
 
 const cloneProject = async (appname: any) => {
   const spinner = createSpinner("Creating Project ").start();
@@ -141,6 +142,33 @@ const checkIfInsideProject = async () => {
     });
   });
 };
+
+const checkFileExist = async (paths: Array<string>, files: Array<string>) => {
+  const spinner = createSpinner("checking file avilability").start();
+  await sleep();
+  return new Promise((resolve, reject) => {
+    paths.forEach((route) => {
+      fs.readdir(route, (err, file) => {
+        if (file.includes(files[0] || files[1])) {
+          if (
+            readline.keyInYN(
+              "\r\n The filename already exist. Do you want to rewrite ?"
+            )
+          ) {
+            spinner.update({ text: "Rewriting existing file" }).success();
+          } else {
+            spinner.update({ text: "Failed to create new state" }).error();
+            process.exit(1);
+          }
+        } else {
+          err && console.log(err);
+        }
+      });
+    });
+    resolve(true);
+    spinner.stop();
+  });
+};
 export {
   cloneProject,
   installNodeModules,
@@ -149,4 +177,5 @@ export {
   renameProject,
   setProject,
   checkIfInsideProject,
+  checkFileExist,
 };
