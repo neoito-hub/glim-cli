@@ -1,31 +1,22 @@
-import ejs from "ejs";
 import * as fs from "fs";
-import { sagaTemplate, sliceTemplate } from "../template/store";
 import { checkIfInsideProject, checkFileExist } from "../utils/file-system";
 import { validator } from "../utils/namevalidator";
+import { createSagaStore } from "./subtasks/createSagaStore";
+import { createZustandStore } from "./subtasks/createZustandStore";
 
 const createStore = async (storename: string) => {
-  const SAGAROOT = "./src/redux/sagas/";
-  const SLICEROOT = "./src/redux/slices/";
-  const SAGA = `${storename}.saga.ts`;
-  const SLICE = `${storename}.slice.ts`;
-  const saga = sagaTemplate(storename);
-  const slice = sliceTemplate(storename);
-
-  await checkFileExist([SAGAROOT, SLICEROOT], [SAGA, SLICE]);
+  let configdata = {};
   await validator(storename);
   await checkIfInsideProject();
-  fs.writeFile(`./src/redux/sagas/${storename}.saga.ts`, saga, (err) => {
-    !err &&
-      console.log(
-        `Created ${storename}.saga.ts in src/redux/sagas/${storename}`
-      );
-  });
-  fs.writeFile(`./src/redux/slices/${storename}.slice.ts`, slice, (err) => {
-    !err &&
-      console.log(
-        `Created ${storename}.slice.ts in src/redux/slices/${storename}`
-      );
+  fs.readFile("./glim.config.json", (err, file) => {
+    if (!err) {
+      configdata = JSON.parse(file.toString());
+      const store = configdata.configurations.state_management;
+      store === "redux" && createSagaStore(storename);
+      store === "zustand" && createZustandStore(storename);
+    } else {
+      console.log("Unable to read config file");
+    }
   });
 };
 export { createStore };
