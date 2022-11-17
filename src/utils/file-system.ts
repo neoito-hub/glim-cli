@@ -7,21 +7,18 @@ import { getPackageManager } from "./react-native";
 import { filecopy } from "../constants/system";
 import * as readline from "readline-sync";
 
-const cloneProject = async (appname: any) => {
+const cloneProject = async (appname: string, giturl: string) => {
   const spinner = createSpinner("Creating Project ").start();
   return new Promise((resolve, reject) => {
-    exec(
-      `git clone https://github.com/devpenzil/onecredit-rn.git ${appname}`,
-      (err) => {
-        if (err) {
-          spinner.error();
-          process.exit(1);
-        } else {
-          spinner.success();
-          resolve(true);
-        }
+    exec(`git clone ${giturl} ${appname}`, (err) => {
+      if (err) {
+        spinner.error();
+        process.exit(1);
+      } else {
+        spinner.success();
+        resolve(true);
       }
-    );
+    });
   });
 };
 
