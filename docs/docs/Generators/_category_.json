@@ -1,0 +1,9 @@
+{
+  "label": "Generators",
+  "position": 3,
+  "collapsible": true,
+  "link": {
+    "type": "generated-index",
+    "description": "Gems of Glim CLI"
+  }
+}

@@ -10,7 +10,8 @@
     "glim": "dist/index.js"
   },
   "scripts": {
-    "start": "npx ts-node dist/index.js"
+    "start": "npx ts-node dist/index.js",
+    "copyboilerplate": "cp -r boilerplate/ dist/boilerplate/"
   },
   "repository": {
     "type": "git",
@@ -31,7 +32,8 @@
     "@types/figlet": "^1.5.5",
     "@types/fs-extra": "^9.0.13",
     "@types/gradient-string": "^1.1.2",
-    "@types/inquirer": "^9.0.2",
+    "@types/inquirer": "^9.0.3",
+    "@types/readline-sync": "^1.4.4",
     "@types/shelljs": "^0.8.11",
     "@types/yargs": "^17.0.13",
     "app-root-path": "^3.1.0",
@@ -44,7 +46,9 @@
     "inquirer": "^9.1.4",
     "nanospinner": "^1.1.0",
     "print-message": "^3.0.1",
+    "readline-sync": "^1.4.10",
     "shelljs": "^0.8.5",
+    "terminal-link": "^3.0.0",
     "typescript": "^4.8.4",
     "yargs": "^17.6.0"
   }
