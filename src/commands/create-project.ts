@@ -11,6 +11,7 @@ import {
   renameProject,
   cloneProject,
   miscSetup,
+  createConfigFile,
 } from "../utils/file-system";
 import { validator } from "../utils/namevalidator";
 
@@ -23,6 +24,7 @@ const createProject = async (appname: any) => {
   await installNodeModules(appname);
   await installPods(appname);
   await miscSetup(appname);
+  await createConfigFile(answers);
   await projectCreationCompleted(appname);
 };
 export { createProject };
