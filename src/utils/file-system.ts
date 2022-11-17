@@ -6,6 +6,8 @@ import { sleep } from "./helper";
 import { getPackageManager } from "./react-native";
 import { filecopy } from "../constants/system";
 import * as readline from "readline-sync";
+import { configTemplate } from "../template/config";
+import { AppDetailsInterface } from "../types/interfaces";
 
 const cloneProject = async (appname: string, giturl: string) => {
   const spinner = createSpinner("Creating Project ").start();
@@ -166,6 +168,26 @@ const checkFileExist = async (paths: Array<string>, files: Array<string>) => {
     spinner.stop();
   });
 };
+
+const createConfigFile = async (details: AppDetailsInterface) => {
+  const spinner = createSpinner(`creating config file`).start();
+  await sleep();
+  return new Promise((resolve, reject) => {
+    fs.writeFile(
+      `${details.appname}/glim.config.json`,
+      configTemplate(details),
+      (err) => {
+        if (err) {
+          spinner.update({ text: "Unable to create config file" }).error();
+        } else {
+          spinner.update({ text: "Config file created" }).success();
+        }
+      }
+    );
+    resolve(true);
+  });
+};
+
 export {
   cloneProject,
   installNodeModules,
@@ -175,4 +197,5 @@ export {
   setProject,
   checkIfInsideProject,
   checkFileExist,
+  createConfigFile,
 };
