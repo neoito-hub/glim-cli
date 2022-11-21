@@ -10,4 +10,23 @@ export const createZustandStore = async (storename: string) => {
   fs.writeFile(`./src/store/slices/${storename}slice.ts`, slice, (err) => {
     !err && console.log(`Created ${storename}slice.ts in src/store/slices/`);
   });
+  fs.readFile("./src/store/store.ts", (err, file) => {
+    if (!err) {
+      const outFILE = file.toString();
+      let finalOut =
+        outFILE.slice(0, outFILE.indexOf("store = (...a) => ({") + 20) +
+        ` \n\r ...${storename}Slice(...a), ` +
+        outFILE.slice(outFILE.indexOf("store = (...a) => ({") + 20);
+      finalOut =
+        `import { ${storename}Slice } from './slices/${storename}Slice' \n` +
+        finalOut;
+      fs.writeFile("./src/store/store.ts", finalOut, (err) => {
+        if (!err) {
+          console.log("Root Store updated");
+        }
+      });
+    } else {
+      console.log(err);
+    }
+  });
 };

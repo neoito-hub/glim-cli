@@ -25,13 +25,35 @@ export const createSagaStore = async (storename: string) => {
   fs.readFile("./src/redux/store/root.reducer.ts", (err, file) => {
     if (!err) {
       const outFILE = file.toString();
-      const finalOut =
+      let finalOut =
         outFILE.slice(0, outFILE.indexOf("combineReducers({") + 17) +
         `\n\r\t ${storename} : ${storename}Slice.reducer,` +
         outFILE.slice(outFILE.indexOf("combineReducers({") + 17);
+      finalOut =
+        `import { ${storename}Slice } from '../slices/${storename}.slice' \n` +
+        finalOut;
       fs.writeFile("./src/redux/store/root.reducer.ts", finalOut, (err) => {
         if (!err) {
           console.log("Root Reducer updated");
+        }
+      });
+    } else {
+      console.log(err);
+    }
+  });
+  fs.readFile("./src/redux/store/root.saga.ts", (err, file) => {
+    if (!err) {
+      const outFILE = file.toString();
+      let finalOut =
+        outFILE.slice(0, outFILE.indexOf("yield all([") + 11) +
+        `${storename}Saga(),` +
+        outFILE.slice(outFILE.indexOf("yield all([") + 11);
+      finalOut =
+        `import { ${storename}Saga } from '../sagas/${storename}.saga' \n` +
+        finalOut;
+      fs.writeFile("./src/redux/store/root.saga.ts", finalOut, (err) => {
+        if (!err) {
+          console.log("Root saga updated");
         }
       });
     } else {
