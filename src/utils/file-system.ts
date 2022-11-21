@@ -130,7 +130,7 @@ const checkIfInsideProject = async () => {
   await sleep();
   return new Promise((resolve, reject) => {
     fs.readdir(`${process.cwd()}`, (err, files) => {
-      if (files.includes("android" && "ios" && "package.json")) {
+      if (files.includes("glim.config.json")) {
         spinner.update({ text: "Target locked" }).success();
         resolve(true);
       } else {
