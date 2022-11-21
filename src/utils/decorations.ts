@@ -63,7 +63,9 @@ const displaySelectedDetails = (projectDetails: AppDetailsInterface) => {
   console.log(gradient.instagram.multiline("--------------------"));
   console.log(" ");
 };
-const projectQuestions = async (appname: string) => {
+const projectQuestions = async (
+  appname: string
+): Promise<AppDetailsInterface> => {
   const appdetails: AppDetailsInterface = {
     packagename: "",
     selectedStore: "",

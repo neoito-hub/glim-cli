@@ -17,7 +17,7 @@ import { validator } from "../utils/namevalidator";
 
 const createProject = async (appname: any) => {
   await startingProject();
-  const answers: AppDetailsInterface = await projectQuestions(appname);
+  const answers = await projectQuestions(appname);
   await validator(appname);
   await cloneProject(appname, chooserepo(answers?.selectedStore));
   await renameProject(appname, answers?.packagename);
