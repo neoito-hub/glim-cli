@@ -22,4 +22,20 @@ export const createSagaStore = async (storename: string) => {
         `Created ${storename}.slice.ts in src/redux/slices/${storename}`
       );
   });
+  fs.readFile("./src/redux/store/root.reducer.ts", (err, file) => {
+    if (!err) {
+      const outFILE = file.toString();
+      const finalOut =
+        outFILE.slice(0, outFILE.indexOf("combineReducers({") + 17) +
+        `\n\r\t ${storename} : ${storename}Slice.reducer,` +
+        outFILE.slice(outFILE.indexOf("combineReducers({") + 17);
+      fs.writeFile("./src/redux/store/root.reducer.ts", finalOut, (err) => {
+        if (!err) {
+          console.log("Root Reducer updated");
+        }
+      });
+    } else {
+      console.log(err);
+    }
+  });
 };
