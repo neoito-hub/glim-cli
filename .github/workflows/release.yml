@@ -21,11 +21,9 @@ jobs:
         run: npm install
       - name: build
         run: npx tsc
-      - name: Copy Boilerplate 🔧
-        run: npm run copyboilerplate
       - name: Install dependencies and build 🔧
         run: npm run start
       - name: Publish package on NPM 📦
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

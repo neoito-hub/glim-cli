@@ -6,22 +6,21 @@ import { sleep } from "./helper";
 import { getPackageManager } from "./react-native";
 import { filecopy } from "../constants/system";
 import * as readline from "readline-sync";
+import { configTemplate } from "../template/config";
+import { AppDetailsInterface } from "../types/interfaces";
 
-const cloneProject = async (appname: any) => {
+const cloneProject = async (appname: string, giturl: string) => {
   const spinner = createSpinner("Creating Project ").start();
   return new Promise((resolve, reject) => {
-    exec(
-      `git clone https://github.com/devpenzil/onecredit-rn.git ${appname}`,
-      (err) => {
-        if (err) {
-          spinner.error();
-          process.exit(1);
-        } else {
-          spinner.success();
-          resolve(true);
-        }
+    exec(`git clone ${giturl} ${appname}`, (err) => {
+      if (err) {
+        spinner.error();
+        process.exit(1);
+      } else {
+        spinner.success();
+        resolve(true);
       }
-    );
+    });
   });
 };
 
@@ -131,7 +130,7 @@ const checkIfInsideProject = async () => {
   await sleep();
   return new Promise((resolve, reject) => {
     fs.readdir(`${process.cwd()}`, (err, files) => {
-      if (files.includes("android" && "ios" && "package.json")) {
+      if (files.includes("glim.config.json")) {
         spinner.update({ text: "Target locked" }).success();
         resolve(true);
       } else {
@@ -169,6 +168,26 @@ const checkFileExist = async (paths: Array<string>, files: Array<string>) => {
     spinner.stop();
   });
 };
+
+const createConfigFile = async (details: AppDetailsInterface) => {
+  const spinner = createSpinner(`creating config file`).start();
+  await sleep();
+  return new Promise((resolve, reject) => {
+    fs.writeFile(
+      `${details.appname}/glim.config.json`,
+      configTemplate(details),
+      (err) => {
+        if (err) {
+          spinner.update({ text: "Unable to create config file" }).error();
+        } else {
+          spinner.update({ text: "Config file created" }).success();
+        }
+      }
+    );
+    resolve(true);
+  });
+};
+
 export {
   cloneProject,
   installNodeModules,
@@ -178,4 +197,5 @@ export {
   setProject,
   checkIfInsideProject,
   checkFileExist,
+  createConfigFile,
 };

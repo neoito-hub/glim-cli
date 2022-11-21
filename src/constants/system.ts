@@ -6,4 +6,14 @@ const filecopy =
   (os === "linux" && "cp -r") ||
   "cp -r";
 
-export { filecopy };
+const chooserepo = (storename: "redux" | "zustand" | "") => {
+  if (storename === "redux") {
+    return "https://github.com/Glim-House/glim-boilerplate-redux-saga.git";
+  } else if (storename === "zustand") {
+    return "https://github.com/Glim-House/glim-boilerplate-zustand.git";
+  } else {
+    console.log("no repo found");
+    process.exit(1);
+  }
+};
+export { filecopy, chooserepo };
