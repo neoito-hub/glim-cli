@@ -1,9 +1,10 @@
+
 <p align="center">
     <img src="./public/Glim.png" alt="glim logo">
 </p>
 <h1  align="center"> The Next Generation React Native CLI  </h1>
 
-[![npm version](https://badge.fury.io/js/clidevpenzil.svg)](https://badge.fury.io/js/clidevpenzil)
+[![npm version](https://badge.fury.io/js/glim-cli.svg)](https://badge.fury.io/js/glim-cli)
 ![example workflow](https://github.com/neoito-hub/glim-cli/actions/workflows/release.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Generic badge](https://img.shields.io/badge/PRs-WELCOME-<COLOR>.svg)](https://shields.io/)

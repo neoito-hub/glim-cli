@@ -1,6 +1,6 @@
 {
   "name": "glim-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
   "directories": {
@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/neoito-hub/glim-cli.git"
   },
-  "keywords": [],
+  "keywords": ["glim", "cli", "React Native"],
   "author": "",
   "license": "ISC",
   "bugs": {
