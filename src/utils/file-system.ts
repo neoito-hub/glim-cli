@@ -9,6 +9,12 @@ import * as readline from "readline-sync";
 import { configTemplate } from "../template/config";
 import { AppDetailsInterface } from "../types/interfaces";
 
+/**
+ * Clone Project from Github
+ * @param appname
+ * @param giturl
+ * @returns boolean
+ */
 const cloneProject = async (appname: string, giturl: string) => {
   const spinner = createSpinner("Creating Project ").start();
   return new Promise((resolve, reject) => {
@@ -24,6 +30,11 @@ const cloneProject = async (appname: string, giturl: string) => {
   });
 };
 
+/**
+ * Install Node Modules
+ * @param appname
+ * @returns boolean
+ */
 const installNodeModules = async (appname: any) => {
   const nodeSpinner = createSpinner(
     `Hold on, were grabbing the dependencies you need for ${appname}`
@@ -50,6 +61,11 @@ const installNodeModules = async (appname: any) => {
   });
 };
 
+/**
+ * Install Pods fro Ios
+ * @param appname
+ * @returns boolean
+ */
 const installPods = async (appname: any) => {
   if (process.platform === "darwin") {
     const podsSpinner = createSpinner("Installing Pods...").start();
@@ -67,6 +83,11 @@ const installPods = async (appname: any) => {
   }
 };
 
+/**
+ * Remove existing git configuration
+ * @param appname
+ * @returns boolean
+ */
 const miscSetup = async (appname: any) => {
   const miscSpinner = createSpinner("Setting up ").start();
   return new Promise((resolve, reject) => {
@@ -83,6 +104,11 @@ const miscSetup = async (appname: any) => {
   });
 };
 
+/**
+ * Initialize a new github Repo
+ * @param appname
+ * @returns boolean
+ */
 const initializeGit = async (appname: any) => {
   const Spinner = createSpinner("inintailizing git").start();
   return new Promise((resolve, reject) => {
@@ -102,6 +128,12 @@ const initializeGit = async (appname: any) => {
   });
 };
 
+/**
+ * Rename the existing project
+ * @param appname
+ * @param packagename
+ * @returns boolean
+ */
 const renameProject = async (appname: any, packagename: any) => {
   const spinner = createSpinner("Renaming...").start();
   return new Promise((resolve, reject) => {
@@ -120,6 +152,12 @@ const renameProject = async (appname: any, packagename: any) => {
   });
 };
 
+// ! Not in use
+/**
+ * Copy project biolerplate from local
+ * @param appname
+ * @returns boolean
+ */
 const setProject = async (appname: any) => {
   const spinner = createSpinner(
     `Cooking new project seed for ${appname}`
@@ -144,6 +182,10 @@ const setProject = async (appname: any) => {
   });
 };
 
+/**
+ * Check the terminal location is inside or outside project
+ * @returns boolean
+ */
 const checkIfInsideProject = async () => {
   const spinner = createSpinner(
     `Confirming that you are inside the project`
@@ -165,6 +207,12 @@ const checkIfInsideProject = async () => {
   });
 };
 
+/**
+ * Check if a file exist or not
+ * @param paths
+ * @param files
+ * @returns boolean
+ */
 const checkFileExist = async (paths: Array<string>, files: Array<string>) => {
   const spinner = createSpinner("checking file avilability").start();
   await sleep();
@@ -192,6 +240,11 @@ const checkFileExist = async (paths: Array<string>, files: Array<string>) => {
   });
 };
 
+/**
+ * Create a new configuration file
+ * @param details
+ * @returns boolean
+ */
 const createConfigFile = async (details: AppDetailsInterface) => {
   const spinner = createSpinner(`creating config file`).start();
   await sleep();

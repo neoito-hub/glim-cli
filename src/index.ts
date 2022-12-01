@@ -3,6 +3,8 @@
 import yargs from "yargs";
 import { createProject } from "./commands";
 import { selectModule } from "./commands/subtasks/selectModule";
+
+// * CLI starts from here
 const args = yargs(process.argv.slice(2))
   .command(
     "create-app",

@@ -1,9 +1,10 @@
-import ejs from "ejs";
 import * as fs from "fs";
 import { componentTemplate, styleTemplate } from "../template/component";
-import { checkIfInsideProject } from "../utils/file-system";
-import { validator } from "../utils/namevalidator";
 
+/**
+ * create a new component in glim project
+ * @param compname
+ */
 const createComponent = async (compname: string) => {
   const component = componentTemplate(compname);
   const style = styleTemplate(compname);

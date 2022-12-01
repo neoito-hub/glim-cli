@@ -1,6 +1,4 @@
 import * as fs from "fs";
-import { checkIfInsideProject, checkFileExist } from "../utils/file-system";
-import { validator } from "../utils/namevalidator";
 import { createSagaStore } from "./subtasks/createSagaStore";
 import { createZustandStore } from "./subtasks/createZustandStore";
 
@@ -9,8 +7,15 @@ type Configdata = {
     state_management: string;
   };
 };
+
+/**
+ * Create a new store in the glim app
+ * @param storename
+ */
 const createStore = async (storename: string) => {
   let configdata: Configdata = {};
+
+  // * get configurations from glim.config file
   fs.readFile("./glim.config.json", (err, file) => {
     if (!err) {
       configdata = JSON.parse(file.toString());

@@ -5,9 +5,8 @@ const regex = new RegExp(/^[a-zA-Z]+$/);
 /**
  * Validate folder name - only accept charecters
  * @param appname
- * @returns
+ * @returns boolean
  */
-
 export async function validator(appname: string) {
   const waiting = createSpinner("validating Name...").start();
   await sleep();
@@ -23,10 +22,11 @@ export async function validator(appname: string) {
     }
   });
 }
+
 /**
  * Convert string to pascal case
  * @param name
- * @returns
+ * @returns string
  */
 export function toPascalCase(name: any) {
   if (!regex.test(name)) {

@@ -5,6 +5,8 @@ import { AppDetailsInterface } from "../types/interfaces";
 
 const packegeRegex = new RegExp(/^com\.[a-zA-Z]+$/);
 const appnameRegex = new RegExp(/^[a-zA-Z]+$/);
+
+// Show decerated text while creating a new project
 async function startingProject() {
   return new Promise(async (resolve, reject) => {
     figlet.text(
@@ -29,6 +31,8 @@ async function startingProject() {
     );
   });
 }
+
+// Show decerated text when project successsfully created
 async function projectCreationCompleted(appname: string) {
   return new Promise(async (resolve, reject) => {
     figlet.text(
@@ -53,6 +57,8 @@ async function projectCreationCompleted(appname: string) {
     );
   });
 }
+
+// Show user preferences while creating a new project
 const displaySelectedDetails = (projectDetails: AppDetailsInterface) => {
   console.log(gradient.instagram.multiline("--------------------"));
   console.log(`👉🏻 App name : ${projectDetails.appname.value} `);
@@ -69,6 +75,8 @@ const displaySelectedDetails = (projectDetails: AppDetailsInterface) => {
   console.log(gradient.instagram.multiline("--------------------"));
   console.log(" ");
 };
+
+// Ask questions to user while creating a new project
 const projectQuestions = async (): Promise<AppDetailsInterface> => {
   let appdetails: AppDetailsInterface = {
     packagename: { value: "" },
@@ -159,6 +167,7 @@ const projectQuestions = async (): Promise<AppDetailsInterface> => {
     resolve(appdetails);
   });
 };
+
 const helpConsole = async () => {
   return new Promise(async (resolve, reject) => {
     console.log("Invalid or Incomplete command");
