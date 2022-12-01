@@ -7,8 +7,6 @@ import { validator } from "../utils/namevalidator";
 const createComponent = async (compname: string) => {
   const component = componentTemplate(compname);
   const style = styleTemplate(compname);
-  await validator(compname);
-  await checkIfInsideProject();
   fs.mkdir(`./src/components/${compname}`, (err) => {
     if (!err) {
       fs.writeFile(

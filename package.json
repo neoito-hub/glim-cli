@@ -1,6 +1,6 @@
 {
   "name": "glim-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/index.js",
   "directories": {
@@ -16,13 +16,17 @@
     "type": "git",
     "url": "git+https://github.com/neoito-hub/glim-cli.git"
   },
-  "keywords": ["glim", "cli", "React Native"],
+  "keywords": [
+    "glim",
+    "cli",
+    "React Native"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/neoito-hub/glim-cli/issues"
   },
-  "homepage": "https://github.com/neoito-hub/glim-cli#readme",
+  "homepage": "https://glim-cli.netlify.app/",
   "devDependencies": {
     "@types/node": "^18.11.8"
   },
@@ -42,7 +46,7 @@
     "fs-extra": "^10.1.0",
     "gluegun": "^5.1.2",
     "gradient-string": "^2.0.2",
-    "inquirer": "^9.1.4",
+    "inquirer": "^8.2.5",
     "nanospinner": "^1.1.0",
     "print-message": "^3.0.1",
     "readline-sync": "^1.4.10",

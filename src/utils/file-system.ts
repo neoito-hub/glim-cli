@@ -83,6 +83,25 @@ const miscSetup = async (appname: any) => {
   });
 };
 
+const initializeGit = async (appname: any) => {
+  const Spinner = createSpinner("inintailizing git").start();
+  return new Promise((resolve, reject) => {
+    exec(`cd ${appname} && git init`, (err) => {
+      !err &&
+        exec(`cd ${appname} && git add .`, (err) => {
+          exec(
+            `cd ${appname} && git commit -m "Project Created with Glim"`,
+            (err) => {
+              err
+                ? Spinner.update({ text: "unable to initalize git" }).error()
+                : Spinner.success();
+            }
+          );
+        });
+    });
+  });
+};
+
 const renameProject = async (appname: any, packagename: any) => {
   const spinner = createSpinner("Renaming...").start();
   return new Promise((resolve, reject) => {
@@ -126,16 +145,20 @@ const setProject = async (appname: any) => {
 };
 
 const checkIfInsideProject = async () => {
-  const spinner = createSpinner(`Finding the landing location`).start();
+  const spinner = createSpinner(
+    `Confirming that you are inside the project`
+  ).start();
   await sleep();
   return new Promise((resolve, reject) => {
     fs.readdir(`${process.cwd()}`, (err, files) => {
       if (files.includes("glim.config.json")) {
-        spinner.update({ text: "Target locked" }).success();
+        spinner.success();
         resolve(true);
       } else {
         spinner
-          .update({ text: "Its seems like you are outside the project" })
+          .update({
+            text: "Its seems like you are outside the project. 'Generate' command only work with glim project directory",
+          })
           .error();
       }
     });
@@ -174,7 +197,7 @@ const createConfigFile = async (details: AppDetailsInterface) => {
   await sleep();
   return new Promise((resolve, reject) => {
     fs.writeFile(
-      `${details.appname}/glim.config.json`,
+      `${details.appname.value}/glim.config.json`,
       configTemplate(details),
       (err) => {
         if (err) {
@@ -198,4 +221,5 @@ export {
   checkIfInsideProject,
   checkFileExist,
   createConfigFile,
+  initializeGit,
 };

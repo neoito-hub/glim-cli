@@ -1,11 +1,10 @@
 import figlet from "figlet";
 import gradient from "gradient-string";
-import { createSpinner } from "nanospinner";
-import * as readline from "readline-sync";
+import inquirer from "inquirer";
 import { AppDetailsInterface } from "../types/interfaces";
-import { sleep } from "./helper";
 
-const packegeRegex = new RegExp(/^com\./);
+const packegeRegex = new RegExp(/^com\.[a-zA-Z]+$/);
+const appnameRegex = new RegExp(/^[a-zA-Z]+$/);
 async function startingProject() {
   return new Promise(async (resolve, reject) => {
     figlet.text(
@@ -55,38 +54,107 @@ async function projectCreationCompleted(appname: string) {
   });
 }
 const displaySelectedDetails = (projectDetails: AppDetailsInterface) => {
-  console.log(" ");
   console.log(gradient.instagram.multiline("--------------------"));
-  console.log(`👉🏻 package name : ${projectDetails.packagename} `);
-  console.log(`👉🏻 Store Management : ${projectDetails.selectedStore} `);
-  console.log(`👉🏻 Project Path : ${process.cwd()}/${projectDetails.appname} `);
+  console.log(`👉🏻 App name : ${projectDetails.appname.value} `);
+  console.log(`👉🏻 Package name : ${projectDetails.packagename.value} `);
+  console.log(`👉🏻 Store Management : ${projectDetails.selectedStore.value} `);
+  console.log(`👉🏻 Initailize Detox : ${projectDetails.detox.value} `);
+  console.log(`👉🏻 Initailize fastlane : ${projectDetails.fastlane.value} `);
+  console.log(
+    `👉🏻 Install Dependencies : ${projectDetails.installdependencies.value} `
+  );
+  console.log(
+    `👉🏻 Project Path : ${process.cwd()}/${projectDetails.appname.value} `
+  );
   console.log(gradient.instagram.multiline("--------------------"));
   console.log(" ");
 };
-const projectQuestions = async (
-  appname: string
-): Promise<AppDetailsInterface> => {
-  const appdetails: AppDetailsInterface = {
-    packagename: "",
-    selectedStore: "",
-    appname: appname,
+const projectQuestions = async (): Promise<AppDetailsInterface> => {
+  let appdetails: AppDetailsInterface = {
+    packagename: { value: "" },
+    selectedStore: { value: "redux" },
+    appname: {
+      value: "",
+    },
+    initializegit: { value: false },
+    detox: { value: false },
+    fastlane: { value: false },
+    installdependencies: { value: false },
+    packagemanager: { value: "yarn" },
   };
   return new Promise(async (resolve, reject) => {
-    for (let index = 1; index > 0; index++) {
-      appdetails.packagename = readline.question("Enter the Package name  ");
-      if (packegeRegex.test(appdetails.packagename)) {
-        break;
-      } else {
-        console.log("invalide package name. enter again");
-      }
-    }
-    const storeOptions: Array<"redux" | "zustand" | ""> = ["redux", "zustand"];
-    const storeName = readline.keyInSelect(
-      storeOptions,
-      "Choose the State management."
-    );
-    appdetails.selectedStore = storeOptions[storeName];
-    !appdetails.selectedStore && process.exit();
+    appdetails.appname = await inquirer.prompt({
+      name: "value",
+      type: "input",
+      message: "Enter the App name: ",
+      default() {
+        return "glimapp";
+      },
+      validate: async (input: string) => {
+        if (!appnameRegex.test(input)) {
+          return "Invalid Appname";
+        }
+        return true;
+      },
+    });
+    appdetails.packagename = await inquirer.prompt({
+      name: "value",
+      type: "input",
+      message: "Enter the Package name: ",
+      default() {
+        return `com.${appdetails.appname.value}`;
+      },
+      validate: async (input: string) => {
+        if (!packegeRegex.test(input)) {
+          return "Invalid packagename";
+        }
+        return true;
+      },
+    });
+    appdetails.selectedStore = await inquirer.prompt({
+      name: "value",
+      type: "list",
+      message: "Choose the State management: ",
+      choices: ["redux", "zustand"],
+    });
+    appdetails.initializegit = await inquirer.prompt({
+      name: "value",
+      type: "confirm",
+      message: "Do you want to initialize git ?",
+      default() {
+        return true;
+      },
+    });
+    appdetails.detox = await inquirer.prompt({
+      name: "value",
+      type: "confirm",
+      message: "Do you want to initialize detox for automation ?",
+      default() {
+        return false;
+      },
+    });
+    appdetails.fastlane = await inquirer.prompt({
+      name: "value",
+      type: "confirm",
+      message: "Do you want to initialize fastlane for CI/CD ?",
+      default() {
+        return false;
+      },
+    });
+    appdetails.packagemanager = await inquirer.prompt({
+      name: "value",
+      type: "list",
+      message: "Choose the Package manager: ",
+      choices: ["npm", "yarn"],
+    });
+    appdetails.installdependencies = await inquirer.prompt({
+      name: "value",
+      type: "confirm",
+      message: "Do you want to Install the Dependencies ?",
+      default() {
+        return false;
+      },
+    });
     displaySelectedDetails(appdetails);
     resolve(appdetails);
   });

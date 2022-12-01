@@ -11,8 +11,6 @@ type Configdata = {
 };
 const createStore = async (storename: string) => {
   let configdata: Configdata = {};
-  await validator(storename);
-  await checkIfInsideProject();
   fs.readFile("./glim.config.json", (err, file) => {
     if (!err) {
       configdata = JSON.parse(file.toString());

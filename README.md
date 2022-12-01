@@ -113,4 +113,3 @@ npx glim generate --store [component-name]
 
 ![GitHub Contributors Image](https://contrib.rocks/image?repo=neoito-hub/glim-cli)
 
-[![made-with-javascript](https://img.shields.io/badge/Made%20with%20love%20and-JavaScript-1f425f.svg)](https://www.javascript.com)

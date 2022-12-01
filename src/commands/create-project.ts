@@ -1,5 +1,4 @@
 import { chooserepo } from "../constants/system";
-import { AppDetailsInterface } from "../types/interfaces";
 import {
   startingProject,
   projectQuestions,
@@ -12,19 +11,24 @@ import {
   cloneProject,
   miscSetup,
   createConfigFile,
+  initializeGit,
 } from "../utils/file-system";
-import { validator } from "../utils/namevalidator";
 
-const createProject = async (appname: any) => {
+const createProject = async () => {
+  const answers = await projectQuestions();
   await startingProject();
-  const answers = await projectQuestions(appname);
-  await validator(appname);
-  await cloneProject(appname, chooserepo(answers?.selectedStore));
-  await renameProject(appname, answers?.packagename);
-  await installNodeModules(appname);
-  await installPods(appname);
-  await miscSetup(appname);
+  await cloneProject(
+    answers.appname.value,
+    chooserepo(answers.selectedStore.value)
+  );
+  await renameProject(answers.appname.value, answers.packagename.value);
+  answers.installdependencies.value &&
+    (await installNodeModules(answers.appname.value));
+  answers.installdependencies.value &&
+    (await await installPods(answers.appname.value));
+  await miscSetup(answers.appname.value);
+  answers.initializegit.value && (await initializeGit(answers.appname.value));
   await createConfigFile(answers);
-  await projectCreationCompleted(appname);
+  await projectCreationCompleted(answers.appname.value);
 };
 export { createProject };
