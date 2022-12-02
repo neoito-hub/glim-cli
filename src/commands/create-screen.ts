@@ -1,14 +1,13 @@
-import ejs from "ejs";
 import * as fs from "fs";
 import { screenTemplate, styleTemplate } from "../template/screen";
-import { checkIfInsideProject } from "../utils/file-system";
-import { validator } from "../utils/namevalidator";
 
+/**
+ * create a new screen in glim project
+ * @param screenname
+ */
 const createScreen = async (screenname: string) => {
   const screen = screenTemplate(screenname);
   const style = styleTemplate(screenname);
-  await validator(screenname);
-  await checkIfInsideProject();
   fs.mkdir(`./src/screens/${screenname}`, (err) => {
     if (!err) {
       fs.writeFile(

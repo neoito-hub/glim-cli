@@ -6,6 +6,7 @@ const filecopy =
   (os === "linux" && "cp -r") ||
   "cp -r";
 
+// project seed repo urls
 const chooserepo = (storename: "redux" | "zustand" | "") => {
   if (storename === "redux") {
     return "https://github.com/Glim-House/glim-boilerplate-redux-saga.git";
