@@ -20,7 +20,16 @@ const cloneProject = async (appname: string, giturl: string) => {
   return new Promise((resolve, reject) => {
     exec(`git clone ${giturl} ${appname}`, (err) => {
       if (err) {
-        spinner.error();
+        if (err.code === 128) {
+          spinner
+            .update({
+              text: `Unable to create the project. ${appname} already exist `,
+            })
+            .error();
+        } else {
+          spinner.error();
+        }
+
         process.exit(1);
       } else {
         spinner.success();
