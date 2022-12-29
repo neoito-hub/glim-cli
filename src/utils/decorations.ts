@@ -66,6 +66,7 @@ const displaySelectedDetails = (projectDetails: AppDetailsInterface) => {
   console.log(`👉🏻 Store Management : ${projectDetails.selectedStore.value} `);
   console.log(`👉🏻 Initailize Detox : ${projectDetails.detox.value} `);
   console.log(`👉🏻 Initailize fastlane : ${projectDetails.fastlane.value} `);
+  console.log(`👉🏻 Package manager : ${projectDetails.packagemanager.value} `);
   console.log(
     `👉🏻 Install Dependencies : ${projectDetails.installdependencies.value} `
   );
