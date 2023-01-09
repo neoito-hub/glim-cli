@@ -32,27 +32,31 @@ export const useRoutes = () => {
     },
     {
       name: " Generators",
-      routename: "/generators",
+      routename: "/generator",
       nestedRoute: [
         {
           name: "Component",
-          routename: "component-generator",
+          routename: "/generator/component",
           isActive: false,
         },
-        { name: "Screen", routename: "screen-generator", isActive: false },
-        { name: "Store", routename: "store-generator", isActive: false },
+        { name: "Screen", routename: "/generator/screen", isActive: false },
+        { name: "Store", routename: "/generator/store", isActive: false },
       ],
       icons: Settings,
-      isActive: path === "/generators",
+      isActive: path.includes("generator"),
     },
     {
       name: " Testing",
-      routename: "testing",
+      routename: "/testing",
       icons: Warning,
-      isActive: path === "/testing",
+      isActive: path.includes("testing"),
       nestedRoute: [
-        { name: "e2e", routename: "/e2e", isActive: false },
-        { name: "Unit Testing", routename: "/unit-testing", isActive: false },
+        { name: "e2e", routename: "/testing/e2e", isActive: false },
+        {
+          name: "Unit Testing",
+          routename: "/testing/unit-testing",
+          isActive: false,
+        },
       ],
     },
     {
