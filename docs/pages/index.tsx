@@ -8,10 +8,10 @@ function Home() {
         <title>GLim</title>
       </Head>
       <div className="container w-full  mx-auto pt-8 ">
-        <h2>Segment Documentation</h2>
+        <h2>Glim - all in one react native tool</h2>
         <p className="mb-5">
-          Welcome to the Segment! Get familiar with our products, features and
-          integrations!
+          glim aims to provide a hassle free react native templating and
+          development with a fully featured boilerplate
         </p>
         <div className="flex flex-wrap w-full ">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((obj, index) => {
