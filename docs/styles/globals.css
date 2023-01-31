@@ -13,3 +13,10 @@ h4{
 p{
   @apply text-base text-textSecondary font-normal leading-7;
 }
+li{
+  @apply text-textSecondary;
+  line-height: 32px;
+}
+table{
+  @apply text-textSecondary
+}

@@ -12,7 +12,7 @@
   "scripts": {
     "start": "npx ts-node dist/index.js",
     "doc-dev": "cd docs && next dev",
-    "doc-build": "cd docs && next build",
+    "doc-build": "cd docs && next build && next export",
     "doc-start": "cd docs && next start",
     "doc-lint": "cd docs && next lint"
   },
