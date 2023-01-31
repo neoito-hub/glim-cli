@@ -48,10 +48,10 @@ function Home() {
                     Totally New Here?
                   </div>
                   <p>
-                    Not sure what to track or why? Check out Segment's Analytics
-                    Academy to learn more about the wide world of analytics,
-                    including the what and why and some stories about beautiful
-                    stacks.
+                    Not sure what to track or why? Check out Segment&#39;s
+                    Analytics Academy to learn more about the wide world of
+                    analytics, including the what and why and some stories about
+                    beautiful stacks.
                   </p>
                 </div>
               </div>

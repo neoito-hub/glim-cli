@@ -11,8 +11,8 @@ function Gettingstarted() {
       <p className="mb-2">To create new glim project, you can use :</p>
       <CodeSnippet code={createProject} label="Bash" />
       <p className="mt-2">
-        Once's it running, it will create a new glim project with corresponding
-        name along with typical folders and configuration files.
+        Once&#39;s it running, it will create a new glim project with
+        corresponding name along with typical folders and configuration files.
       </p>
 
       <h4 className="mt-5">Folder Structure</h4>
@@ -25,9 +25,9 @@ function Gettingstarted() {
         <li>
           <span className="text-primaryGreen"> /android and /ios </span> - The
           folders where all the native code lives. If we needed to add or edit
-          any platform specific native code, this is where we'd have to look. We
-          also need to go into these folders if we have to install any native
-          libraries
+          any platform specific native code, this is where we&#39;d have to
+          look. We also need to go into these folders if we have to install any
+          native libraries
         </li>
         <li>
           <span className="text-primaryGreen">.prettierrc.js </span> - Code
