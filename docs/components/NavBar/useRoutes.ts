@@ -17,7 +17,7 @@ export const useRoutes = () => {
     icons: () => JSX.Element;
     isActive: boolean;
   }[] = [
-    { name: "Home", routename: "/", icons: Home, isActive: path === "/" },
+    { name: "Home", routename: "/docs", icons: Home, isActive: path === "/" },
     {
       name: "Overview",
       routename: "overview",

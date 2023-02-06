@@ -1,7 +1,12 @@
 import React from "react";
+import MainLayout from "../../layout/MainLayout";
 
 function UnitTesting() {
-  return <div>UnitTesting</div>;
+  return (
+    <MainLayout>
+      <div>UnitTesting</div>
+    </MainLayout>
+  );
 }
 
 export default UnitTesting;

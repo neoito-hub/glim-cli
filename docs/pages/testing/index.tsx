@@ -1,7 +1,12 @@
 import React from "react";
+import MainLayout from "../../layout/MainLayout";
 
 function testing() {
-  return <div>testing</div>;
+  return (
+    <MainLayout>
+      <div>testing</div>
+    </MainLayout>
+  );
 }
 
 export default testing;
