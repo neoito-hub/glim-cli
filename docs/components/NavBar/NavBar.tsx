@@ -2,14 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRoutes } from "./useRoutes";
-import Home from "../../assets/icons/Home";
 
 function NavBar() {
   const { routes } = useRoutes();
   return (
     <div className="font-base">
-      <div className="px-3 py-10 flex justify-center ">
-        <Image src={"./glimlogo.svg"} width={61} height={26} alt="" />
+      <div className="px-3 py-10 flex justify-center">
+        <Link href={"/"}>
+          <Image src={"./glimlogo.svg"} width={61} height={26} alt="" />
+        </Link>
       </div>
       <div className="px-10">
         {routes.map((obj, index) => {

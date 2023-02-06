@@ -1,7 +1,12 @@
 import React from "react";
+import MainLayout from "../../layout/MainLayout";
 
 function E2E() {
-  return <div>E2E</div>;
+  return (
+    <MainLayout>
+      <div>E2E</div>
+    </MainLayout>
+  );
 }
 
 export default E2E;
