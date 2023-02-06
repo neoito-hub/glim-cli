@@ -32,4 +32,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: out
+          FOLDER: docs/out
