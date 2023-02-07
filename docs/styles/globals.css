@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h2{
+  @apply text-[40px] text-primaryGreen font-semibold;
+}
+h4{
+  @apply text-textPrimary text-[26px] font-medium;
+}
+p{
+  @apply text-base text-textSecondary font-normal leading-7;
+}
+li{
+  @apply text-textSecondary;
+  line-height: 32px;
+}
+table{
+  @apply text-textSecondary
+}

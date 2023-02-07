@@ -1,5 +1,4 @@
 import { chooserepo } from "../constants/system";
-import { AppDetailsInterface } from "../types/interfaces";
 import {
   startingProject,
   projectQuestions,
@@ -12,19 +11,43 @@ import {
   cloneProject,
   miscSetup,
   createConfigFile,
+  initializeGit,
 } from "../utils/file-system";
-import { validator } from "../utils/namevalidator";
 
-const createProject = async (appname: any) => {
+const createProject = async () => {
+  // ask questions before creating a project
+  const answers = await projectQuestions();
+
+  // show decorated text in terminal before creating project
   await startingProject();
-  const answers = await projectQuestions(appname);
-  await validator(appname);
-  await cloneProject(appname, chooserepo(answers?.selectedStore));
-  await renameProject(appname, answers?.packagename);
-  await installNodeModules(appname);
-  await installPods(appname);
-  await miscSetup(appname);
+
+  // Clone project from github
+  await cloneProject(
+    answers.appname.value,
+    chooserepo(answers.selectedStore.value)
+  );
+
+  // Rename the cloned repo
+  await renameProject(answers.appname.value, answers.packagename.value);
+
+  // Install all the required dependencies - depends on user choice
+  answers.installdependencies.value &&
+    (await installNodeModules(answers.appname.value));
+
+  // Install all the required pods - depends on user choice
+  answers.installdependencies.value &&
+    (await await installPods(answers.appname.value));
+
+  // Remove pre iniitailized git repo
+  await miscSetup(answers.appname.value);
+
+  // Initialize a new git repo - depends on user choice
+  answers.initializegit.value && (await initializeGit(answers.appname.value));
+
+  // Create a glim.config.js file in root folder
   await createConfigFile(answers);
-  await projectCreationCompleted(appname);
+
+  // Show success message
+  await projectCreationCompleted(answers.appname.value);
 };
 export { createProject };
