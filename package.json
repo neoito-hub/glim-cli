@@ -1,49 +1,28 @@
 {
   "name": "glim-cli",
-  "version": "1.0.3",
-  "description": "Next generation CLI for react native development",
-  "main": "dist/index.js",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/neoito-hub/glim-cli.git"
-  },
-  "keywords": [
-    "glim",
-    "cli",
-    "React Native"
-  ],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/neoito-hub/glim-cli/issues"
-  },
-  "homepage": "https://glim-cli.netlify.app/",
-  "devDependencies": {
-    "@types/node": "^18.11.8",
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.20",
-    "tailwindcss": "^3.2.4"
-  },
   "dependencies": {
-    "@mdx-js/react": "^1.6.22",
-    "@next/font": "13.1.1",
-    "@types/node": "18.11.18",
-    "@types/react": "18.0.26",
+    "@next/font": "13.1.6",
+    "@types/node": "18.13.0",
+    "@types/react": "18.0.28",
     "@types/react-dom": "18.0.10",
-    "eslint": "8.31.0",
-    "eslint-config-next": "13.1.1",
-    "maplibre-gl": "^2.4.0",
-    "next": "13.1.1",
-    "prism-react-renderer": "^1.3.5",
+    "eslint": "8.34.0",
+    "eslint-config-next": "13.1.6",
+    "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "4.9.4"
-
+    "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.6"
   }
 }
