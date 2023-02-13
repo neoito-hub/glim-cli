@@ -1,6 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import MainLayout from "../layout/MainLayout";
+import { docHomeBlock } from "../constants/docHome";
+import Link from "next/link";
 
 function Doc() {
   return (
@@ -16,21 +18,27 @@ function Doc() {
             development with a fully featured boilerplate
           </p>
           <div className="flex flex-wrap w-full ">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((obj, index) => {
+            {docHomeBlock.map((obj, index) => {
               return (
                 <div className="w-1/2" key={index}>
-                  <div className="m-3 border border-[#EDF0F1] p-6 rounded-xl flex space-x-3 group hover:border-textSecondary cursor-pointer">
-                    <div>
-                      <div className="w-14 h-14 bg-surface group-hover:bg-[#DBF3EA] rounded mt-2"></div>
-                    </div>
-                    <div>
-                      <div className="text-textPrimary text-2xl">Guides</div>
-                      <div className="text-sm text-textPrimary">
-                        Start here! Best practices, Setup steps, and other
-                        useful information.
+                  <Link href={obj.route}>
+                    <div className="m-3 border border-[#EDF0F1] p-6 rounded-xl flex space-x-3 group hover:border-textSecondary cursor-pointer">
+                      <div>
+                        <div className="w-14 h-14 bg-surface group-hover:bg-[#DBF3EA] rounded mt-2 flex justify-center items-center text-2xl">
+                          {obj.emoji}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-textPrimary text-2xl">
+                          {obj.heading}
+                        </div>
+                        <div className="text-sm text-textPrimary">
+                          Start here! Best practices, Setup steps, and other
+                          useful information.
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               );
             })}
