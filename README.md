@@ -1,115 +1,36 @@
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-<p align="center">
-    <img src="./public/Glim.png" alt="glim logo">
-</p>
-<h1  align="center"> The Next Generation React Native CLI  </h1>
+## Getting Started
 
-[![npm version](https://badge.fury.io/js/glim-cli.svg)](https://badge.fury.io/js/glim-cli)
-![example workflow](https://github.com/neoito-hub/glim-cli/actions/workflows/release.yml/badge.svg)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Generic badge](https://img.shields.io/badge/PRs-WELCOME-<COLOR>.svg)](https://shields.io/)
-
-## React Native Latest Architecture CLI along with a fully tested boilerplate, component/screen generators, and more! 🎉
-
-# Glim Boilerplate
-
-Glim boilerplate includes with different set of libraries, so you can just start coding without doing any configurations.
-
-<table>
-  <tr>
-    <td>
-      <b>Library</b>
-    </td>
-    <td>
-      <b>Description</b>
-    </td>
-  </tr>
-  <tr>
-    <td>React Native</td>
-    <td>The best cross-platform mobile framework</td>
-  </tr>
-  <tr>
-    <td>React</td>
-    <td>JavaScript library for building user interfaces</td>
-  </tr>
-  <tr>
-    <td>Typescript</td>
-    <td>Static Typechecker</td>
-  </tr>
-  <tr>
-    <td>Tailwind</td>
-    <td>CSS framework for styling</td>
-  </tr>
-  <tr>
-    <td>React Navigation</td>
-    <td>Routing and navigating between multiple components</td>
-  </tr>
-  <tr>
-    <td>RN Reanimated</td>
-    <td>
-      Provides an API that greatly simplifies the process of creating smooth,
-      powerful, and maintainable animations
-    </td>
-  </tr>
-  <tr>
-    <td>AsyncStorage</td>
-    <td>Asynchronous, persistent, key-value storage system</td>
-  </tr>
-  <tr>
-    <td>Flipper</td>
-    <td>React Native Debugger</td>
-  </tr>
-  <tr>
-    <td>Jest</td>
-    <td>JavaScript testing framework</td>
-  </tr>
-</table>
-
-# Folder Structure
-
-- `index.js`- The main entry point of application. It is equivalent to React on the web mounting the project to the root DOM node
-- `/android and /ios `- The folders where all the native code lives. If we needed to add or edit any platform specific native code, this is where we'd have to look. We also need to go into these folders if we have to install any native libraries
-- `.prettierrc.js` - Code formatter which is again optional, but you can read more about it in our code style chapter
-- `/src` - Base folder which will store all the necessary folders or files
-  - `/components` - Where all the reusable components inside the project resides
-  - `/config` - Contains all the configurations of the project
-  - `/hooks` - Contains all the custom hooks inside the project
-  - `/navigation` - Conatains all the navigations
-  - `/redux` - Contains all the redux components such as store, saga and slice
-  - `/screens` - Contains all the screens inside the project
-  - `/utils` - Storing reusable methods
-
-# Quick Start
-
-## Create new React Native Project
-
-To create new glim project, you can use
+First, run the development server:
 
 ```bash
-npx glim create-app [app-name]
+npm run dev
+# or
+yarn dev
 ```
 
-Once's it running, it will create a new glim project with corresponding name along with typical folders and configuration files.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Create new Component
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-```bash
-npx glim generate --component [component-name]
-```
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-## Create new Screen
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-```bash
-npx glim generate --screen [screen-name]
-```
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Create new Redux components
+## Learn More
 
-```bash
-npx glim generate --store [component-name]
-```
+To learn more about Next.js, take a look at the following resources:
 
-# Contributors
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-![GitHub Contributors Image](https://contrib.rocks/image?repo=neoito-hub/glim-cli)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
