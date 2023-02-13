@@ -1,5 +1,4 @@
 import React from "react";
-import { Map } from "maplibre-gl";
 
 function Features() {
   return (
