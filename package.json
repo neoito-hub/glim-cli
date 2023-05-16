@@ -66,6 +66,7 @@
     "maplibre-gl": "^2.4.0",
     "nanospinner": "^1.1.0",
     "next": "13.1.1",
+    "openai": "^3.2.1",
     "print-message": "^3.0.1",
     "prism-react-renderer": "^1.3.5",
     "react": "18.2.0",
