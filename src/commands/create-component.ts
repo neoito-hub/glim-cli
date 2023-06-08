@@ -6,13 +6,18 @@ import { openai } from "../openai/config";
  * @param compname
  */
 const createComponent = async (compname: string) => {
-  console.log("creating component");
   try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: "Hello world",
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "user",
+          content:
+            "create reusable react native button component in typescript with seperate style file and test file",
+        },
+      ],
     });
-    console.log(completion.data.choices[0].text);
+    const data = completion.data.choices[0].message?.content;
   } catch (error) {
     if (error.response) {
       console.log(error.response.status);
