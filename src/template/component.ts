@@ -35,4 +35,22 @@ const styleTemplate = (compname: any) => {
   return temp;
 };
 
-export { componentTemplate, styleTemplate };
+const testTemplate = (compname: string) => {
+  const temp = `
+  import React from "react";
+  import { render } from "react-native-testing-library";
+  import ${compname} from "./${compname}.screen";
+  describe("${compname} Component", () => {
+    it("renders correctly", () => {
+      const { getByText } = render(<${compname} />);
+      const ${compname}Text = getByText("${compname}");
+      
+      expect(${compname}Text).toBeDefined();
+    });
+  });
+
+  `;
+  return temp;
+};
+
+export { componentTemplate, styleTemplate, testTemplate };
