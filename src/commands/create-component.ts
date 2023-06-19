@@ -18,9 +18,15 @@ interface SpinnerCallback {
 const createComponent = async (
   compname: string,
   componentDescription: string,
-  stopSpinner: SpinnerCallback
+  stopSpinner: SpinnerCallback,
+  gpt: string
 ) => {
   const s = spinner();
+  const defaultFiles: string[] = [
+    componentTemplate(compname),
+    styleTemplate(compname),
+    testTemplate(compname),
+  ];
   function fileWriting(params: string[]) {
     const componentPath = `./src/components/${compname}`;
     fs.mkdir(componentPath, (err) => {
@@ -46,47 +52,42 @@ const createComponent = async (
   }
 
   try {
-    const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content: `  Create a reusable React Native component named ${compname} in TypeScript.
-          The component should have separate files for the main logic, styles, and tests.
-          Each file should be wrapped within three backticks.
-          The component is about :
-          ${componentDescription} `,
-        },
-      ],
-    });
-
-    const data = completion?.data?.choices[0]?.message?.content;
-    const string = data?.toString();
-    const regex = /```([\s\S]*?)```/g;
-    const matches = string?.match(regex);
-
-
-    if (matches) {
-      const files = matches.map((element) => {
-        const content = element.replace(/```/g, "");
-        const regexPattern = /(.*import[\s\S]*\n[\s\S]*\n)/;
-        const extractedContents = content.match(regexPattern);
-        return extractedContents ? extractedContents[0] : "";
+    if (gpt === "Yes") {
+      const completion = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "user",
+            content: `  Create a reusable React Native component named ${compname} in TypeScript.
+            The component should have separate files for the main logic, styles, and tests.
+            Each file should be wrapped within three backticks.
+            The component is about :
+            ${componentDescription} `,
+          },
+        ],
       });
 
-      fileWriting(files);
+      const data = completion?.data?.choices[0]?.message?.content;
+      const string = data?.toString();
+      const regex = /```([\s\S]*?)```/g;
+      const matches = string?.match(regex);
 
-    } else {
-      const defaultFiles: string[] = [
-        componentTemplate(compname),
-        styleTemplate(compname),
-        testTemplate(compname),
-      ];
+      if (matches) {
+        const files = matches.map((element) => {
+          const content = element.replace(/```/g, "");
+          const regexPattern = /(.*import[\s\S]*\n[\s\S]*\n)/;
+          const extractedContents = content.match(regexPattern);
+          return extractedContents ? extractedContents[0] : "";
+        });
+
+        fileWriting(files);
+      } else {
+        fileWriting(defaultFiles);
+      }
+    } else if (gpt === "No") {
       fileWriting(defaultFiles);
     }
-
     stopSpinner();
-
   } catch (error) {
     if (error.response) {
       console.log(error.response.status);
