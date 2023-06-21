@@ -1,12 +1,22 @@
 import { OpenAIApi, Configuration } from "openai";
 import fs from "fs";
 
-const configData = fs.readFileSync("glim.config.json", "utf8");
-const config = JSON.parse(configData);
-const apiKey = config.apiKey;
+export const createOpenAIApiInstance = async () => {
+  let configData;
+  try {
+    configData = fs.readFileSync("glim.config.json", "utf8");
+    const ooo = fs.readFileSync("glim.config.json", "utf8");
+  } catch (error) {
+    configData = '{"apiKey": "YOUR_FALLBACK_API_KEY"}';
+  }
 
-const configuration = new Configuration({
-  apiKey: apiKey,
-});
+  const config = await JSON.parse(configData);
 
-export const openai = new OpenAIApi(configuration);
+  const apiKey = await config.apiKey;
+
+  const configuration = new Configuration({
+    apiKey: await apiKey,
+  });
+  const openai = new OpenAIApi(configuration);
+  return openai;
+};

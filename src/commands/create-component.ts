@@ -4,8 +4,8 @@ import {
   styleTemplate,
   testTemplate,
 } from "../template/component";
-import { openai } from "../openai/config";
 import { spinner } from "@clack/prompts";
+import { OpenAIApi, Configuration } from "openai";
 
 interface SpinnerCallback {
   (): void;
@@ -27,8 +27,16 @@ const createComponent = async (
     styleTemplate(compname),
     testTemplate(compname),
   ];
-  function fileWriting(params: string[]) {
-    const componentPath = `./src/components/${compname}`;
+  const configData = fs.readFileSync("glim.config.json", "utf8");
+  const config = JSON.parse(configData);
+  const apiKey = config.apiKey;
+  async function fileWriting(params: string[]) {
+    // const componentPath = `./src/components/${compname}`;
+
+    const componentPath = (await config?.path?.component)
+      ? `./${config?.path?.component}/${compname}`
+      : `./src/components/${compname}`;
+
     fs.mkdir(componentPath, (err) => {
       if (!err) {
         const fileNames = ["screen.tsx", "style.ts", "test.tsx"];
@@ -53,7 +61,13 @@ const createComponent = async (
 
   try {
     if (gpt === "Yes") {
-      const completion = await openai.createChatCompletion({
+      const configuration = new Configuration({
+        apiKey: await apiKey,
+      });
+
+      const openai = new OpenAIApi(await configuration);
+
+      const completion = await openai?.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: [
           {
@@ -73,13 +87,12 @@ const createComponent = async (
       const matches = string?.match(regex);
 
       if (matches) {
-        const files = matches.map((element) => {
-          const content = element.replace(/```/g, "");
+        const files = matches?.map((element) => {
+          const content = element?.replace(/```/g, "");
           const regexPattern = /(.*import[\s\S]*\n[\s\S]*\n)/;
-          const extractedContents = content.match(regexPattern);
+          const extractedContents = content?.match(regexPattern);
           return extractedContents ? extractedContents[0] : "";
         });
-
         fileWriting(files);
       } else {
         fileWriting(defaultFiles);

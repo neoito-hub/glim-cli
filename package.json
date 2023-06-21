@@ -1,6 +1,6 @@
 {
   "name": "glim-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Next generation CLI for react native development",
   "main": "dist/index.js",
   "directories": {

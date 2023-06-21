@@ -8,6 +8,7 @@ import {
   intro,
   outro,
   spinner,
+  select,
 } from "@clack/prompts";
 import { checkIfInsideProject } from "../../utils/file-system";
 import { toPascalCase } from "../../utils/namevalidator";
@@ -47,15 +48,36 @@ const selectModule = async () => {
     cancel("Operation cancelled.");
     process.exit(0);
   }
+  const defaultPath = "src/components";
+  if (!fs.existsSync(defaultPath)) {
+    const userPath = await text({
+      message: "Enter your component folder path",
+      placeholder: "src/comp",
+    });
 
+    if (isCancel(userPath)) {
+      cancel("Operation cancelled.");
+      process.exit(0);
+    }
+    fs.mkdirSync(userPath, { recursive: true });
+    const data = fs.readFileSync("glim.config.json", "utf8");
+    const jsonContent = JSON.parse(data);
+    jsonContent.path = {
+      component: `${userPath}`,
+    };
+    fs.writeFileSync(
+      "glim.config.json",
+      JSON.stringify(jsonContent, null, 2),
+      "utf8"
+    );
+  }
   while (true) {
-    const moduleGpt = await multiselect({
+    const moduleGpt = await select({
       message: "Do you want to create this component with the help of AI?",
       options: [
         { value: "Yes", label: "Yes", hint: "Powered by AI" },
         { value: "No", label: "No" },
       ],
-      required: true,
     });
 
     if (isCancel(moduleGpt)) {
@@ -69,7 +91,7 @@ const selectModule = async () => {
         outro("");
       }
 
-      if (moduleGpt[0] === "Yes") {
+      if (moduleGpt === "Yes") {
         const moduleGptKey = await text({
           message: `Enter your open AI key`,
           placeholder: "sa-n9******************iH8f",
@@ -114,16 +136,16 @@ const selectModule = async () => {
             toPascalCase(moduleName),
             componentDescription,
             stopSpinner,
-            moduleGpt[0]
+            moduleGpt
           );
         }
-      } else if (moduleGpt[0] === "No") {
+      } else if (moduleGpt === "No") {
         spin.start("Please wait while we are creating your component");
         createComponent(
           toPascalCase(moduleName ? moduleName : ""),
           " ",
           stopSpinner,
-          moduleGpt[0]
+          moduleGpt
         );
       }
     } else if (moduleType[0] === "screen") {
