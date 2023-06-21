@@ -4,7 +4,7 @@ export const configTemplate = (details: AppDetailsInterface) => {
   const temp = `
 {
     "appname":"${details.appname}",
-    "version":"1.0",
+    "version":"1.0"
 }
 `;
   return temp;

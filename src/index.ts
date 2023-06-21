@@ -3,6 +3,7 @@
 import yargs from "yargs";
 import { createProject } from "./commands";
 import { selectModule } from "./commands/subtasks/selectModule";
+import { addProject } from "./commands/add-project";
 
 // * CLI starts from here
 const args = yargs(process.argv.slice(2))
@@ -14,6 +15,16 @@ const args = yargs(process.argv.slice(2))
     },
     (argv) => {
       createProject();
+    }
+  )
+  .command(
+    "init",
+    "Add  Glim to a new Project",
+    (yargs) => {
+      return yargs;
+    },
+    (argv) => {
+      addProject();
     }
   )
   .command(
