@@ -2,6 +2,7 @@ import figlet from "figlet";
 import gradient from "gradient-string";
 import inquirer from "inquirer";
 import { AppDetailsInterface } from "../types/interfaces";
+import { text, confirm, select, isCancel, cancel } from "@clack/prompts";
 
 const packegeRegex = new RegExp(/^com\.[a-zA-Z]+$/);
 const appnameRegex = new RegExp(/^[a-zA-Z]+$/);
@@ -52,6 +53,7 @@ async function projectCreationCompleted(appname: string) {
         }
         console.log(" ");
         console.log(gradient.cristal.multiline(data));
+        console.log(" ");
         resolve(true);
       }
     );
@@ -61,18 +63,13 @@ async function projectCreationCompleted(appname: string) {
 // Show user preferences while creating a new project
 const displaySelectedDetails = (projectDetails: AppDetailsInterface) => {
   console.log(gradient.instagram.multiline("--------------------"));
-  console.log(`👉🏻 App name : ${projectDetails.appname.value} `);
-  console.log(`👉🏻 Package name : ${projectDetails.packagename.value} `);
-  console.log(`👉🏻 Store Management : ${projectDetails.selectedStore.value} `);
-  console.log(`👉🏻 Initailize Detox : ${projectDetails.detox.value} `);
-  console.log(`👉🏻 Initailize fastlane : ${projectDetails.fastlane.value} `);
-  console.log(`👉🏻 Package manager : ${projectDetails.packagemanager.value} `);
+  console.log(`👉🏻 App name : ${projectDetails.appname} `);
+  console.log(`👉🏻 Package name : ${projectDetails.packagename} `);
+  console.log(`👉🏻 Package manager : ${projectDetails.packagemanager} `);
   console.log(
-    `👉🏻 Install Dependencies : ${projectDetails.installdependencies.value} `
+    `👉🏻 Install Dependencies : ${projectDetails.installdependencies} `
   );
-  console.log(
-    `👉🏻 Project Path : ${process.cwd()}/${projectDetails.appname.value} `
-  );
+  console.log(`👉🏻 Project Path : ${process.cwd()}/${projectDetails.appname} `);
   console.log(gradient.instagram.multiline("--------------------"));
   console.log(" ");
 };
@@ -80,90 +77,69 @@ const displaySelectedDetails = (projectDetails: AppDetailsInterface) => {
 // Ask questions to user while creating a new project
 const projectQuestions = async (): Promise<AppDetailsInterface> => {
   let appdetails: AppDetailsInterface = {
-    packagename: { value: "" },
-    selectedStore: { value: "redux" },
-    appname: {
-      value: "",
-    },
-    initializegit: { value: false },
-    detox: { value: false },
-    fastlane: { value: false },
-    installdependencies: { value: false },
-    packagemanager: { value: "yarn" },
+    packagename: "",
+    appname: "",
+    initializegit: true,
+    installdependencies: true,
+    packagemanager: "yarn",
   };
   return new Promise(async (resolve, reject) => {
-    appdetails.appname = await inquirer.prompt({
-      name: "value",
-      type: "input",
-      message: "Enter the App name: ",
-      default() {
-        return "glimapp";
-      },
-      validate: async (input: string) => {
-        if (!appnameRegex.test(input)) {
-          return "Invalid Appname";
+    appdetails.appname = await text({
+      message: "Enter the App name:",
+      placeholder: "PizzaApp",
+      validate(value: any) {
+        if (!appnameRegex.test(value)) {
+          return "Invalid Name";
         }
-        return true;
       },
     });
-    appdetails.packagename = await inquirer.prompt({
-      name: "value",
-      type: "input",
-      message: "Enter the Package name: ",
-      default() {
-        return `com.${appdetails.appname.value}`;
-      },
-      validate: async (input: string) => {
-        if (!packegeRegex.test(input)) {
-          return "Invalid packagename";
+    if (isCancel(appdetails.appname)) {
+      cancel("Operation cancelled.");
+      process.exit(0);
+    }
+
+    appdetails.packagename = await text({
+      message: "Enter the App package name:",
+      placeholder: "com.pizzaapp",
+      validate(value: any) {
+        if (!packegeRegex.test(value)) {
+          return "Invalid Package Name";
         }
-        return true;
       },
     });
-    appdetails.selectedStore = await inquirer.prompt({
-      name: "value",
-      type: "list",
-      message: "Choose the State management: ",
-      choices: ["redux", "zustand"],
+    if (isCancel(appdetails.packagename)) {
+      cancel("Operation cancelled.");
+      process.exit(0);
+    }
+
+    appdetails.initializegit = await confirm({
+      message: "Do you want to Initialize git?",
     });
-    appdetails.initializegit = await inquirer.prompt({
-      name: "value",
-      type: "confirm",
-      message: "Do you want to initialize git ?",
-      default() {
-        return true;
-      },
+    if (isCancel(appdetails.initializegit)) {
+      cancel("Operation cancelled.");
+      process.exit(0);
+    }
+
+    appdetails.installdependencies = await confirm({
+      message: "Do you want to Install Dependencies?",
     });
-    appdetails.detox = await inquirer.prompt({
-      name: "value",
-      type: "confirm",
-      message: "Do you want to initialize detox for automation ?",
-      default() {
-        return false;
-      },
+    if (isCancel(appdetails.installdependencies)) {
+      cancel("Operation cancelled.");
+      process.exit(0);
+    }
+
+    appdetails.packagemanager = await select({
+      message: "Choose the package manager",
+      options: [
+        { value: "yarn", label: "Yarn" },
+        { value: "npm", label: "Npm" },
+      ],
     });
-    appdetails.fastlane = await inquirer.prompt({
-      name: "value",
-      type: "confirm",
-      message: "Do you want to initialize fastlane for CI/CD ?",
-      default() {
-        return false;
-      },
-    });
-    appdetails.packagemanager = await inquirer.prompt({
-      name: "value",
-      type: "list",
-      message: "Choose the Package manager: ",
-      choices: ["npm", "yarn"],
-    });
-    appdetails.installdependencies = await inquirer.prompt({
-      name: "value",
-      type: "confirm",
-      message: "Do you want to Install the Dependencies ?",
-      default() {
-        return false;
-      },
-    });
+    if (isCancel(appdetails.packagemanager)) {
+      cancel("Operation cancelled.");
+      process.exit(0);
+    }
+
     displaySelectedDetails(appdetails);
     resolve(appdetails);
   });

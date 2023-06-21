@@ -8,6 +8,7 @@ import { filecopy } from "../constants/system";
 import * as readline from "readline-sync";
 import { configTemplate } from "../template/config";
 import { AppDetailsInterface } from "../types/interfaces";
+import { spinner } from "@clack/prompts";
 
 /**
  * Clone Project from Github
@@ -16,23 +17,20 @@ import { AppDetailsInterface } from "../types/interfaces";
  * @returns boolean
  */
 const cloneProject = async (appname: string, giturl: string) => {
-  const spinner = createSpinner("Creating Project ").start();
+  const s = spinner();
+  s.start("Cloning Repo");
+
   return new Promise((resolve, reject) => {
     exec(`git clone ${giturl} ${appname}`, (err) => {
       if (err) {
         if (err.code === 128) {
-          spinner
-            .update({
-              text: `Unable to create the project. ${appname} already exist `,
-            })
-            .error();
+          s.stop(`Unable to create the project. ${appname} already exist`);
         } else {
-          spinner.error();
+          s.stop();
         }
-
         process.exit(1);
       } else {
-        spinner.success();
+        s.stop("Repo cloned");
         resolve(true);
       }
     });
@@ -45,9 +43,8 @@ const cloneProject = async (appname: string, giturl: string) => {
  * @returns boolean
  */
 const installNodeModules = async (appname: any) => {
-  const nodeSpinner = createSpinner(
-    `Hold on, were grabbing the dependencies you need for ${appname}`
-  ).start();
+  const s = spinner();
+  s.start(`Hold on, were grabbing the dependencies you need for ${appname}`);
   const packagemanager = getPackageManager();
   return new Promise((resolve, reject) => {
     exec(
@@ -56,13 +53,11 @@ const installNodeModules = async (appname: any) => {
       }`,
       (err) => {
         if (err) {
-          nodeSpinner
-            .update({ text: "Unable to install dependencies" })
-            .error();
+          s.stop("Unable to install dependencies");
           console.log(err);
           process.exit(1);
         } else {
-          nodeSpinner.update({ text: "Dependencies Installed ✅" }).success();
+          s.stop("Dependencies Installed ✅");
           resolve(true);
         }
       }
@@ -76,15 +71,17 @@ const installNodeModules = async (appname: any) => {
  * @returns boolean
  */
 const installPods = async (appname: any) => {
+  const s = spinner();
   if (process.platform === "darwin") {
-    const podsSpinner = createSpinner("Installing Pods...").start();
+    s.start("Installing Pods");
     return new Promise((resolve, reject) => {
       exec(`cd ${appname}/ios && pod install`, (err) => {
         if (err) {
-          podsSpinner.error({ text: err.message });
+          console.log(err);
+          s.stop(err.message);
           process.exit(1);
         } else {
-          podsSpinner.update({ text: "Pods installed ✅" }).success();
+          s.stop("Pods installed ✅");
           resolve(true);
         }
       });
@@ -98,15 +95,16 @@ const installPods = async (appname: any) => {
  * @returns boolean
  */
 const miscSetup = async (appname: any) => {
-  const miscSpinner = createSpinner("Setting up ").start();
+  const s = spinner();
+  s.start("Setting up ");
   return new Promise((resolve, reject) => {
     exec(`cd ${appname} && rm -rf .git`, (err) => {
       if (err) {
-        miscSpinner.error();
+        s.stop();
         console.log(err);
         process.exit(1);
       } else {
-        miscSpinner.success();
+        s.stop("Ready to launch");
         resolve(true);
       }
     });
@@ -119,7 +117,8 @@ const miscSetup = async (appname: any) => {
  * @returns boolean
  */
 const initializeGit = async (appname: any) => {
-  const Spinner = createSpinner("inintailizing git").start();
+  const s = spinner();
+  s.start("inintailizing git");
   return new Promise((resolve, reject) => {
     exec(`cd ${appname} && git init`, (err) => {
       !err &&
@@ -127,9 +126,12 @@ const initializeGit = async (appname: any) => {
           exec(
             `cd ${appname} && git commit -m "Project Created with Glim"`,
             (err) => {
-              err
-                ? Spinner.update({ text: "unable to initalize git" }).error()
-                : Spinner.success();
+              if (err) {
+                s.stop("unable to initalize git");
+              } else {
+                s.stop("Initialized git");
+                resolve(true);
+              }
             }
           );
         });
@@ -144,16 +146,17 @@ const initializeGit = async (appname: any) => {
  * @returns boolean
  */
 const renameProject = async (appname: any, packagename: any) => {
-  const spinner = createSpinner("Renaming...").start();
+  const s = spinner();
+  s.start("Renaming Project");
   return new Promise((resolve, reject) => {
     exec(
       `cd ${appname} && npx react-native-rename ${appname} -b ${packagename} `,
       (err) => {
         if (err) {
-          spinner.error({ text: err.message });
+          s.stop(err.message);
           process.exit(1);
         } else {
-          spinner.update({ text: `Project Renamed ✅` }).success();
+          s.stop(`Project Renamed ✅`);
           resolve(true);
         }
       }
@@ -196,21 +199,18 @@ const setProject = async (appname: any) => {
  * @returns boolean
  */
 const checkIfInsideProject = async () => {
-  const spinner = createSpinner(
-    `Confirming that you are inside the project`
-  ).start();
+  const s = spinner();
+  s.start("Confirming that you are inside the project");
   await sleep();
   return new Promise((resolve, reject) => {
     fs.readdir(`${process.cwd()}`, (err, files) => {
       if (files.includes("glim.config.json")) {
-        spinner.success();
+        s.stop("Confirmed");
         resolve(true);
       } else {
-        spinner
-          .update({
-            text: "Its seems like you are outside the project. 'Generate' command only work with glim project directory",
-          })
-          .error();
+        s.stop(
+          "Its seems like you are outside the project. 'Generate' command only work with glim project directory"
+        );
       }
     });
   });
@@ -255,17 +255,18 @@ const checkFileExist = async (paths: Array<string>, files: Array<string>) => {
  * @returns boolean
  */
 const createConfigFile = async (details: AppDetailsInterface) => {
-  const spinner = createSpinner(`creating config file`).start();
+  const s = spinner();
+  s.start(`creating config file`);
   await sleep();
   return new Promise((resolve, reject) => {
     fs.writeFile(
-      `${details.appname.value}/glim.config.json`,
+      `${details.appname}/glim.config.json`,
       configTemplate(details),
       (err) => {
         if (err) {
-          spinner.update({ text: "Unable to create config file" }).error();
+          s.stop("Unable to create config file");
         } else {
-          spinner.update({ text: "Config file created" }).success();
+          s.stop("Config file created");
         }
       }
     );
