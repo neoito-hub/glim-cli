@@ -84,7 +84,7 @@ const projectQuestions = async (): Promise<AppDetailsInterface> => {
     packagemanager: "yarn",
   };
   return new Promise(async (resolve, reject) => {
-    appdetails.appname = await text({
+    const appNameResponse = await text({
       message: "Enter the App name:",
       placeholder: "PizzaApp",
       validate(value: any) {
@@ -93,12 +93,12 @@ const projectQuestions = async (): Promise<AppDetailsInterface> => {
         }
       },
     });
-    if (isCancel(appdetails.appname)) {
+    if (isCancel(appNameResponse)) {
       cancel("Operation cancelled.");
       process.exit(0);
     }
-
-    appdetails.packagename = await text({
+    appdetails.appname = appNameResponse;
+    const packageNameResponse = await text({
       message: "Enter the App package name:",
       placeholder: "com.pizzaapp",
       validate(value: any) {
@@ -107,38 +107,39 @@ const projectQuestions = async (): Promise<AppDetailsInterface> => {
         }
       },
     });
-    if (isCancel(appdetails.packagename)) {
+    if (isCancel(packageNameResponse)) {
       cancel("Operation cancelled.");
       process.exit(0);
     }
-
-    appdetails.initializegit = await confirm({
+    appdetails.packagename = packageNameResponse;
+    const initializegitResponse = await confirm({
       message: "Do you want to Initialize git?",
     });
-    if (isCancel(appdetails.initializegit)) {
+    if (isCancel(initializegitResponse)) {
       cancel("Operation cancelled.");
       process.exit(0);
     }
-
-    appdetails.installdependencies = await confirm({
+    appdetails.initializegit = initializegitResponse;
+    const installdependenciesResponse = await confirm({
       message: "Do you want to Install Dependencies?",
     });
-    if (isCancel(appdetails.installdependencies)) {
+    if (isCancel(installdependenciesResponse)) {
       cancel("Operation cancelled.");
       process.exit(0);
     }
-
-    appdetails.packagemanager = await select({
+    appdetails.installdependencies = installdependenciesResponse;
+    const packagemanagerResponse = await select({
       message: "Choose the package manager",
       options: [
         { value: "yarn", label: "Yarn" },
         { value: "npm", label: "Npm" },
       ],
     });
-    if (isCancel(appdetails.packagemanager)) {
+    if (isCancel(packagemanagerResponse)) {
       cancel("Operation cancelled.");
       process.exit(0);
     }
+    appdetails.packagemanager = packagemanagerResponse as "yarn" | "npm";
 
     displaySelectedDetails(appdetails);
     resolve(appdetails);

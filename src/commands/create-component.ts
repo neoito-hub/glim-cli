@@ -101,12 +101,12 @@ const createComponent = async (
       fileWriting(defaultFiles);
     }
     stopSpinner();
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
-      console.log(error.response.status);
-      console.log(error.response.data);
+      console.log(error?.response?.status);
+      console.log(error?.response?.data);
     } else {
-      console.log(error.message);
+      console.log(error?.message);
     }
   }
 };
