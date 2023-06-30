@@ -28,8 +28,8 @@ const createComponent = async (
     testTemplate(compname),
   ];
   const configData = fs.readFileSync("glim.config.json", "utf8");
-  const config = JSON.parse(configData);
-  const apiKey = config.apiKey;
+  const config = await JSON.parse(configData);
+  const apiKey = await config.apiKey;
   async function fileWriting(params: string[]) {
     // const componentPath = `./src/components/${compname}`;
 

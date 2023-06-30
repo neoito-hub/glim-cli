@@ -8,7 +8,8 @@ import { screenTemplate, styleTemplate } from "../template/screen";
 const createScreen = async (screenname: string) => {
   const screen = screenTemplate(screenname);
   const style = styleTemplate(screenname);
-  fs.mkdir(`./src/screens/${screenname}`, (err) => {
+
+  fs.mkdir(`./src/screens/${screenname}`, { recursive: true }, (err) => {
     if (!err) {
       fs.writeFile(
         `./src/screens/${screenname}/${screenname}.screen.tsx`,

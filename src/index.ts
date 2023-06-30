@@ -4,6 +4,7 @@ import yargs from "yargs";
 import { createProject } from "./commands";
 import { selectModule } from "./commands/subtasks/selectModule";
 import { addProject } from "./commands/add-project";
+import { getDataFromTable } from "./supabase/dataCollection";
 
 // * CLI starts from here
 const args = yargs(process.argv.slice(2))
@@ -15,6 +16,16 @@ const args = yargs(process.argv.slice(2))
     },
     (argv) => {
       createProject();
+    }
+  )
+  .command(
+    "clone",
+    "clone the files",
+    (yargs) => {
+      return yargs;
+    },
+    (argv) => {
+      getDataFromTable(argv._ as string[]);
     }
   )
   .command(
