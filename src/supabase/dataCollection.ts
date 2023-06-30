@@ -69,7 +69,7 @@ export const getDataFromTable = async (fileName: string[]) => {
       })
     );
 
-    spin.stop("Thank you for waiting. File created");
+    spin.stop("Thank you for waiting. Component created");
     outro("Component created successfully");
   } catch (error: any) {
     console.error("Error fetching data:", error.message);
