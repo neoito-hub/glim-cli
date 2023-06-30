@@ -39,7 +39,7 @@ const createComponent = async (
 
     fs.mkdir(componentPath, (err) => {
       if (!err) {
-        const fileNames = ["screen.tsx", "style.ts", "test.tsx"];
+        const fileNames = ["component.tsx", "style.ts", "test.tsx"];
         fileNames.forEach((fileName, index) => {
           fs.writeFile(
             `${componentPath}/${compname}.${fileName}`,
