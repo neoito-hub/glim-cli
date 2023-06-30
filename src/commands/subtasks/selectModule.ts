@@ -17,10 +17,11 @@ import {createScreen} from "../create-screen";
 import {createStore} from "../create-store";
 import {isAPIKeyValid} from "../../openai/keyValidation";
 
-const appnameRegex = /^[a-zA-Z]+$/;
-const configData = fs.readFileSync("glim.config.json", "utf8");
-const config = JSON.parse(configData);
+
 const selectModule = async () => {
+    const appnameRegex = /^[a-zA-Z]+$/;
+    const configData = fs.readFileSync("glim.config.json", "utf8");
+    const config = JSON.parse(configData);
     intro("");
     await checkIfInsideProject();
 
