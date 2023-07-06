@@ -17,7 +17,7 @@
 To create new glim project, you can use
 
 ```bash
-npx glim create-app [app-name]
+npx glim-cli create-app
 ```
 
 Once's it running, it will create a new glim project with corresponding name along with typical folders and configuration files.
@@ -25,7 +25,7 @@ Once's it running, it will create a new glim project with corresponding name alo
 ## Generators
 
 ```bash
-npx glim generate
+npx glim-cli generate
 ```
 
 There are two generators
@@ -36,13 +36,13 @@ There are two generators
 ## Add to Existing Project
 
 ```bash
-npx glim generate
+npx glim-cli generate
 ```
 
 ## fetch Component from Directory
 
 ```bash
-npx glim add {componentUniqueId} {ComponentName}
+npx glim-cli add {componentUniqueId} {ComponentName}
 ```
 
 # Contributors
