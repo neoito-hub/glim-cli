@@ -31,13 +31,10 @@ const createComponent = async (
   const config = await JSON.parse(configData);
   const apiKey = await config.apiKey;
   async function fileWriting(params: string[]) {
-    // const componentPath = `./src/components/${compname}`;
-
     const componentPath = (await config?.path?.component)
-      ? `./${config?.path?.component}/${compname}`
+      ? `./src/${config?.path?.component}/${compname}`
       : `./src/components/${compname}`;
-
-    fs.mkdir(componentPath, (err) => {
+    fs.mkdir(componentPath, { recursive: true }, (err) => {
       if (!err) {
         const fileNames = ["component.tsx", "style.ts", "test.tsx"];
         fileNames.forEach((fileName, index) => {
